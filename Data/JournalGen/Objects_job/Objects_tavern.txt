@@ -1,0 +1,22 @@
+_startLow
+a traveler
+a knight errant
+an adventurer
+a party preparing for an adventure
+a wayfarer
+the innkeeper
+the forest warden
+a messenger with an unimportant message
+_endLow
+
+_startMedium
+a group of mercenaries
+some retired adventurer
+the tavern
+a messenger with an important message
+_endMedium
+
+_startHigh
+a resting merchant
+a party that just returned from an adventure
+_endHigh

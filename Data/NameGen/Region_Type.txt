@@ -1,0 +1,9 @@
+Mountain
+River
+Plane
+Field
+Meadow
+Wetland
+Desert
+Grove
+Wasteland

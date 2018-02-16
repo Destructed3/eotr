@@ -1,0 +1,19 @@
+_startLow
+a monk
+a nun
+some wayfarers
+the hermit
+a knight errant
+_endLow
+
+_startMedium
+some farmhands
+some monks
+some nuns
+a chevalier
+_endMedium
+
+_startHigh
+the abbot
+the abbess
+_endHigh

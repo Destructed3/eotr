@@ -1,0 +1,17 @@
+_startLow
+some traveler
+a group of wayfarer
+a farmhand
+a maidservant
+_endLow
+
+_startMedium
+some traveller
+the farmhands
+a couple of maidservants
+_endMedium
+
+_startHigh
+a merchant coming through
+the landlord
+_endHigh
