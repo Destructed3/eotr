@@ -6,7 +6,6 @@
 package gui.room;
 
 import gui.Mainframe;
-import gui.ResourceBar;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;

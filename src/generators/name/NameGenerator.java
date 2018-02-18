@@ -23,15 +23,54 @@ public class NameGenerator {
     List<String> syllable2 = null;
     List<String> monsterSy1 = null;
     List<String> monsterSy2 = null;
-    String[] title1 = {"Rescuer","Hero","Saviour","Hope","Preserver","Builder","Master"}; //6
-    String[] title1Monster = {"Slayer","Devourer","Digester","Destroyer","Polluter","Master", "Bane"}; //6
-    String[] title1Attribute = {"one","two","three","four","five"}; //4
-    String[] title1Skill = {"Barbarian","Warrior","Chosen","Legendary Swordsman","Legendary Archer","Ranger"}; //5
-    String[] title1SkillMonster = {"Barbarian","Monstrousity","Kingslayer","Slaher","Ripper"}; //4
-    String[] title2 = {"pesants","kings","queens","borderlands"}; //3
-    String[] title2Attribute = {"Legged","Armed","Eyed"};
-    //List<String> title1 = null;
-    //List<String> title2 =null;
+    String[] title1 = {
+        "Rescuer",
+        "Hero",
+        "Saviour",
+        "Hope",
+        "Preserver",
+        "Builder",
+        "Master"};
+    String[] title1Monster = {
+        "Slayer",
+        "Devourer",
+        "Digester",
+        "Destroyer",
+        "Polluter",
+        "Master", 
+        "Bane"};
+    String[] title1Attribute = {
+        "one",
+        "two",
+        "three",
+        "four",
+        "five"};
+    String[] title1Skill = {
+        "Barbarian",
+        "Warrior",
+        "Chosen",
+        "Legendary Swordsman",
+        "Legendary Archer",
+        "Ranger"};
+    String[] title1SkillMonster = {
+        "Barbarian",
+        "Monstrousity",
+        "Kingslayer",
+        "Slaher",
+        "Ripper"
+    };
+    String[] title2 = {
+        "pesants",
+        "kings",
+        "queens",
+        "the borderlands"
+    };
+    String[] title2Attribute = {
+        "Legged",
+        "Armed",
+        "Eyed"
+    };
+    
     String name;
     Random r = new Random();    
     boolean monsterSy;
@@ -46,16 +85,16 @@ public class NameGenerator {
         } else {
             name=random1stSy();
         }
-        for(int i = 0; i<nrS ; i++) {
+        for(int i = 0 ; i<nrS ; i++) {
             coin=r.nextInt(99);
             checkSy(coin,monster);
         }
-        if(monster && !monsterSy) {
-            name=name+random2ndSy_Monster();
+        if(monster) {
+            name= name + random2ndSy_Monster();
         }
         coin = r.nextInt(99);
         if(coin>90) {
-            name = name+randomTitle(monster);
+            name = name + randomTitle(monster);
         }
         return name;
     }

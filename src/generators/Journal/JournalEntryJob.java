@@ -48,9 +48,37 @@ public class JournalEntryJob {
     
     ActivityJob aj;
     
-    String[] string_Advisor = {"sharing my wisdom with ","providing advise to ","enlightening ","advising ","consulting ","deliberating with"};
-    String[] string_Bard = {"enternaining ","singing for ","joking for ","cheering up ","amusing ","diverting "};
-    String[] string_Guard = {"guarding ","protecting ","watching over ","standing watch for ","standing sentinel for ","sentinelling "};
-    String[] string_Sorcerer = {"enchanting ","conjuring for ","casting a charm for ","blessing ","bewitching ","casting a spell for"};
+    String[] string_Advisor = {
+        "sharing my wisdom with ",
+        "providing advise to ",
+        "enlightening ",
+        "advising ",
+        "consulting ",
+        "deliberating with"
+    };
+    String[] string_Bard = {
+        "enternaining ",
+        "singing for ",
+        "joking for ",
+        "cheering up ",
+        "amusing ",
+        "diverting "
+    };
+    String[] string_Guard = {
+        "guarding ",
+        "protecting ",
+        "watching over ",
+        "standing watch for ",
+        "standing sentinel for ",
+        "sentinelling "
+    };
+    String[] string_Sorcerer = {
+        "enchanting ",
+        "conjuring for ",
+        "casting a charm for ",
+        "blessing ",
+        "bewitching ",
+        "casting a spell for"
+    };
     
 }

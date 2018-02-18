@@ -129,7 +129,7 @@ public class IFCourseNew extends root.IFTemplate {
             sSize.setPaintTicks(true);
             sSize.addChangeListener((ChangeEvent e) -> {
                 tfSize.setText(String.valueOf(sSize.getValue()));
-                        });
+            });
         }
         return sSize;
     }

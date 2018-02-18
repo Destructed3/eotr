@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import resources.activity.ActivityAdventure;
-import resources.activity.ActivityCourse;
-import resources.activity.ActivityJob;
+import resources.activity.*;
 import resources.Inhabitants.InhStu;
 
 /**

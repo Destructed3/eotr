@@ -398,7 +398,6 @@ public class IFRegion extends IFTemplate {
     private ActionListener alSetList_active_adv;
         
     private JList lJournal;
-    private DefaultListModel lm_Adv;
             
     private JButton btChose;
     private ActionListener alChose;
