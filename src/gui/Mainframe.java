@@ -36,11 +36,11 @@ public class Mainframe extends JFrame {
         res = new Resources();
         sG = new StartGame(this);
         sG.newGame(character);
-        res.getLTea().stream().forEach((pTea) -> {
+        res.lTea.stream().forEach((pTea) -> {
             System.out.println("Teacher nr: "+pTea.getNumber());
         });
         run();
-        System.out.println("It's year "+res.getVariables().getYear());
+        System.out.println("It's year "+res.year);
         System.out.println("Go!");
     }
     public Mainframe(String psave) {
@@ -50,7 +50,7 @@ public class Mainframe extends JFrame {
         sG = new StartGame(this);
         sG.loadGame(psave);
         run();
-        System.out.println("It's year "+res.getVariables().getYear());
+        System.out.println("It's year "+res.year);
         System.out.println("Go!");
     }
     public Mainframe(String psave, boolean newRound) {
@@ -61,7 +61,7 @@ public class Mainframe extends JFrame {
         sG.newRound();
         run();
         menuAdmin.showIFMssg();
-        System.out.println("It's year "+res.getVariables().getYear());
+        System.out.println("It's year "+res.year);
         System.out.println("Go!");
     }
     
@@ -152,11 +152,12 @@ public class Mainframe extends JFrame {
     
     public void addTeacher(InhTea ptea) {
         int cost = ptea.getCost()*6;
-        res.getVariables().substractGold(cost);
-        res.getAcc_year(res.getVariables().getYear()).addTea(ptea.getCost());
+        res.gold -= cost;
+        res.lAccounting.stream().filter(pAcc -> 
+                pAcc.getYear()== res.year).findAny().get().addTea(ptea.getCost());
         ptea.setFH(false);
         ptea.createNr(this);
-        res.getLTea().add(ptea);
+        res.lTea.add(ptea);
         if(menuCourse.getCourseNew()!=null) {
             menuCourse.getCourseNew().addTea(ptea);
         }
@@ -201,7 +202,7 @@ public class Mainframe extends JFrame {
         dsk.add(jif);
     }
     public String repString() {
-        int rep = res.getVariables().getReputation();
+        int rep = res.reputation;
         if(200<rep) {
             return "World Famous";
         } else if(150<rep) {

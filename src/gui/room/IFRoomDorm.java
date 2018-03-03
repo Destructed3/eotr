@@ -58,7 +58,7 @@ public class IFRoomDorm extends JInternalFrame {
         mainP = new JPanel(new java.awt.GridLayout(1,1));
         DefaultListModel lm = new DefaultListModel();
         dorm.getAllInhabitants().stream().forEach(stuNr -> {
-            InhStu stu = dsk.getRes().getLStu().stream().filter(stud -> stud.getNumber()==stuNr).findFirst().get();
+            InhStu stu = dsk.getRes().lStu.stream().filter(stud -> stud.getNumber()==stuNr).findFirst().get();
             int sNr = stu.getNumber();
             String sname = stu.getName();
             int sem = stu.getSemester();

@@ -7,6 +7,9 @@ package endYear;
 
 import gui.Mainframe;
 import java.util.Random;
+import java.util.function.Consumer;
+import resources.Accounting;
+import resources.Inhabitants.InhTea;
 
 /**
  *
@@ -15,7 +18,7 @@ import java.util.Random;
 public class ManageUpkeep {
     public ManageUpkeep(Mainframe pdsk) {
         this.dsk=pdsk;
-        this.year=dsk.getRes().getVariables().getYear();
+        this.year=dsk.getRes().year;
         this.r = new Random();
     }
     
@@ -25,59 +28,64 @@ public class ManageUpkeep {
     }
     
     private void payTeacher() {
-        dsk.getRes().getLTea().forEach(pTea -> {
+        dsk.getRes().lTea.forEach((InhTea pTea) -> {
             try {
-                dsk.getRes().getVariables().substractGold(pTea.getCost());
-                dsk.getRes().getAcc_year(year).addTeaWages(pTea.getCost());
+                dsk.getRes().lAccounting.stream().filter(pAcc -> pAcc.getYear()==year).findAny().get();
+                dsk.getRes().gold -= pTea.getCost();
+                ManageUpkeep.this.getAccountingYear().addTeaWages(pTea.getCost());
                 pTea.setStayTime(pTea.getStayTime()+1);
-            } catch (Exception e) {
-                dsk.getRes().getLTea().removeIf(rTea -> rTea.getNumber()==pTea.getNumber());
-                dsk.getRes().getVariables().substractReputation(r.nextInt(5)+5);
+            }catch (Exception e) {
+                dsk.getRes().lTea.removeIf(rTea -> rTea.getNumber()==pTea.getNumber());
+                dsk.getRes().reputation -= r.nextInt(5)+5;
             }
         });
     }
     private void payRooms() {
-        dsk.getRes().getAcc_year(year).setMaintRS(0);
-        dsk.getRes().getAcc_year(year).setMaintRQ(0);
-        dsk.getRes().getAcc_year(year).setMaintRD(0);
-        maintainRS();
-        maintainRQ();
-        maintainRD();
+        this.getAccountingYear().setMaintRS(0);
+        this.getAccountingYear().setMaintRQ(0);
+        this.getAccountingYear().setMaintRD(0);
+        this.maintainRoomsStudy();
+        this.maintainRoomsQuarter();
+        this.maintainRoomsDorm();
     }
-    private void maintainRS() {
-        dsk.getRes().getLRS().stream().filter(pRS -> pRS.isMaintained()).forEach(pRS -> {
-            if(pRS.getMaintenance()<dsk.getRes().getVariables().getGold()) {
-                dsk.getRes().getVariables().substractGold(pRS.getMaintenance());
-                dsk.getRes().getAcc_year(year).addMaintRS(pRS.getMaintenance());
+    private void maintainRoomsStudy() {
+        dsk.getRes().lRoomStudy.stream().filter(pRS -> pRS.isMaintained()).forEach(pRS -> {
+            if(pRS.getMaintenance()<dsk.getRes().gold) {
+                dsk.getRes().gold -= pRS.getMaintenance();
+                this.getAccountingYear().addMaintRS(pRS.getMaintenance());
             } else {
                 pRS.setMaintained(false);
-                dsk.getRes().getVariables().substractReputation(r.nextInt(3)+5);
+                dsk.getRes().reputation -= r.nextInt(3) + 5;
             }
         });
     }
-    private void maintainRQ() {
-        dsk.getRes().getLRQ().stream().filter(pRQ -> pRQ.isMaintained()).forEach(pRQ -> {
+    private void maintainRoomsQuarter() {
+        dsk.getRes().lRoomQuarter.stream().filter(pRQ -> pRQ.isMaintained()).forEach(pRQ -> {
             try {
-                dsk.getRes().getVariables().substractGold(pRQ.getMaintenance());
-                dsk.getRes().getAcc_year(year).addMaintRQ(pRQ.getMaintenance());
+                dsk.getRes().gold -= pRQ.getMaintenance();
+                this.getAccountingYear().addMaintRQ(pRQ.getMaintenance());
             } catch(Exception e) {
                 pRQ.setMaintained(false);
-                dsk.getRes().getVariables().substractReputation(r.nextInt(3)+5);
+                dsk.getRes().reputation -= r.nextInt(3)+5;
             }
         });
     }
-    private void maintainRD() {
-        dsk.getRes().getLRD().stream().filter(pRD -> 
+    private void maintainRoomsDorm() {
+        dsk.getRes().lRoomDorm.stream().filter(pRD -> 
                 pRD.isMaintained()).forEach(pRD -> {
-            if(pRD.getMaintenance()<dsk.getRes().getVariables().getGold()) {
-                dsk.getRes().getVariables().substractGold(pRD.getMaintenance());
-                dsk.getRes().getAcc_year(year).addMaintRD(pRD.getMaintenance());
+            if(pRD.getMaintenance()<dsk.getRes().gold) {
+                dsk.getRes().gold -= pRD.getMaintenance();
+                this.getAccountingYear().addMaintRD(pRD.getMaintenance());
             } else {
                 pRD.setMaintained(false);
-                dsk.getRes().getVariables().substractReputation(r.nextInt(3)+5);
+                dsk.getRes().reputation -= r.nextInt(3) + 5;
             }
         });
     }
+    
+    private Accounting getAccountingYear() {
+        return dsk.getRes().lAccounting.stream().filter(pAcc -> pAcc.getYear()==year).findAny().get();
+    } 
     
     Mainframe dsk;
     int year;

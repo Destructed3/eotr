@@ -164,13 +164,13 @@ public class IFGoals extends root.IFTemplate {
     
     private JSlider slPhy() {
         if(slPhy==null) {
-            slPhy=new JSlider(0,200,dsk.getRes().getGoals().getValPhy());
+            slPhy=new JSlider(0,200,dsk.getRes().phyVal);
             slPhy.setMajorTickSpacing(50);
             slPhy.setMinorTickSpacing(25);
             slPhy.setPaintTicks(true);
             slPhy.addChangeListener((ChangeEvent e) -> {
                 int newV = slPhy.getValue();
-                dsk.getRes().getGoals().setValPhy(newV);
+                dsk.getRes().phyVal = newV;
                 tfPhy.setText(newV+"");
             });
         }
@@ -178,13 +178,13 @@ public class IFGoals extends root.IFTemplate {
     }
     private JSlider slMen() {
         if(slMen==null) {
-            slMen=new JSlider(0,200,dsk.getRes().getGoals().getValMen());
+            slMen=new JSlider(0,200,dsk.getRes().menVal);
             slMen.setMajorTickSpacing(100);
             slMen.setMinorTickSpacing(25);
             slMen.setPaintTicks(true);
             slMen.addChangeListener((ChangeEvent e) -> {
                 int newV=slMen.getValue();
-                dsk.getRes().getGoals().setValMen(newV);
+                dsk.getRes().menVal = newV;
                 tfMen.setText(newV+"");
             });
         }
@@ -192,13 +192,13 @@ public class IFGoals extends root.IFTemplate {
     }
     private JSlider slSoc() {
         if(slSoc==null) {
-            slSoc=new JSlider(0,200,dsk.getRes().getGoals().getValSoc());
+            slSoc=new JSlider(0,200,dsk.getRes().socVal);
             slSoc.setMajorTickSpacing(100);
             slSoc.setMinorTickSpacing(25);
             slSoc.setPaintTicks(true);
             slSoc.addChangeListener((ChangeEvent e) -> {
                 int newV=slSoc.getValue();
-                dsk.getRes().getGoals().setValSoc(newV);
+                dsk.getRes().socVal = newV;
                 tfSoc.setText(newV+"");
             });
         }
@@ -206,13 +206,13 @@ public class IFGoals extends root.IFTemplate {
     }
     private JSlider slMag() {
         if(slMag==null) {
-            slMag=new JSlider(0,200,dsk.getRes().getGoals().getValMag());
+            slMag=new JSlider(0,200,dsk.getRes().magVal);
             slMag.setMajorTickSpacing(100);
             slMag.setMinorTickSpacing(25);
             slMag.setPaintTicks(true);
             slMag.addChangeListener((ChangeEvent e) -> {
                 int newV=slMag.getValue();
-                dsk.getRes().getGoals().setValMag(newV);
+                dsk.getRes().magVal = newV;
                 tfMag.setText(newV+"");
             });
         }
@@ -220,13 +220,13 @@ public class IFGoals extends root.IFTemplate {
     }
     private JSlider slCombinedAttr() {
         if(slCombinedAttr==null) {
-            slCombinedAttr = new JSlider(0,800,dsk.getRes().getGoals().getValTotal());
+            slCombinedAttr = new JSlider(0,800,dsk.getRes().total);
             slCombinedAttr.setMajorTickSpacing(200);
             slCombinedAttr.setMinorTickSpacing(100);
             slCombinedAttr.setPaintTicks(true);
             slCombinedAttr.addChangeListener((ChangeEvent e) -> {
                 int newV = slCombinedAttr.getValue();
-                dsk.getRes().getGoals().setValTotal(newV);
+                dsk.getRes().total = newV;
                 tfCombinedAttr.setText(newV+"");
             });
         }
@@ -234,28 +234,28 @@ public class IFGoals extends root.IFTemplate {
     }
     private JSlider slYear() {
         if(slYear==null) {
-            slYear = new JSlider(1,10,dsk.getRes().getGoals().getDuration());
+            slYear = new JSlider(1,10,dsk.getRes().duration);
             slYear.setMajorTickSpacing(1);
             slYear.setMinorTickSpacing(1);
             slYear.setPaintTicks(true);
             slYear.addChangeListener((ChangeEvent e) -> {
                 int newV = slYear.getValue();
                 tfYear.setText(newV+"");
-                dsk.getRes().getGoals().setDuration(newV);
+                dsk.getRes().duration = newV;
             });
         }
         return slYear;
     }
     private JSlider slNrGoals() {
         if(slNrGoals==null) {
-            slNrGoals = new JSlider(0,6,dsk.getRes().getGoals().getNrGoals());
+            slNrGoals = new JSlider(0,6,dsk.getRes().nrGoals);
             slNrGoals.setMajorTickSpacing(1);
             slNrGoals.setMinorTickSpacing(1);
             slNrGoals.setPaintTicks(true);
             slNrGoals.addChangeListener((ChangeEvent e) -> {
                 int newV = slNrGoals.getValue();
                 tfNrGoals.setText(newV+"");
-                dsk.getRes().getGoals().setNrGoals(newV);
+                dsk.getRes().nrGoals = newV;
             });
         }
         return slNrGoals;
@@ -307,49 +307,49 @@ public class IFGoals extends root.IFTemplate {
     
     private JTextField tfPhy() {
         if(tfPhy==null) {
-            tfPhy = new JTextField(String.valueOf(dsk.getRes().getGoals().getValPhy()));
+            tfPhy = new JTextField(String.valueOf(dsk.getRes().phyVal));
             tfPhy.addKeyListener(kaPhy());
         }
         return tfPhy;
     }
     private JTextField tfMen() {
         if(tfMen==null) {
-            tfMen = new JTextField(String.valueOf(dsk.getRes().getGoals().getValMen()));
+            tfMen = new JTextField(String.valueOf(dsk.getRes().menVal));
             tfMen.addKeyListener(kaMen());
         }
         return tfMen;
     }
     private JTextField tfSoc() {
         if(tfSoc==null) {
-            tfSoc = new JTextField(String.valueOf(dsk.getRes().getGoals().getValSoc()));
+            tfSoc = new JTextField(String.valueOf(dsk.getRes().socVal));
             tfSoc.addKeyListener(kaSoc());
         }
         return tfSoc;
     }
     private JTextField tfMag() {
         if(tfMag==null) {
-            tfMag = new JTextField(String.valueOf(dsk.getRes().getGoals().getValMag()));
+            tfMag = new JTextField(String.valueOf(dsk.getRes().magVal));
             tfSoc.addKeyListener(kaMag());
         }
         return tfMag;
     }
     private JTextField tfCombinedAttr() {
         if(tfCombinedAttr==null) {
-            tfCombinedAttr=new JTextField(String.valueOf(dsk.getRes().getGoals().getValTotal()));
+            tfCombinedAttr=new JTextField(String.valueOf(dsk.getRes().total));
             tfCombinedAttr.addKeyListener(kaCombinedAttr());
         }
         return tfCombinedAttr;
     }
     private JTextField tfYear() {
         if(tfYear==null) {
-            tfYear = new JTextField(String.valueOf(dsk.getRes().getGoals().getDuration()));
+            tfYear = new JTextField(String.valueOf(dsk.getRes().duration));
             tfYear.addKeyListener(kaYear());
         }
         return tfYear;
     }
     private JTextField tfNrGoals() {
         if(tfNrGoals==null) {
-            tfNrGoals = new JTextField(String.valueOf(dsk.getRes().getGoals().getNrGoals()));
+            tfNrGoals = new JTextField(String.valueOf(dsk.getRes().nrGoals));
             tfNrGoals.setToolTipText("The number of goals that a student has to achieve to finish the studys.");
             tfNrGoals.addKeyListener(kaNrGoals());
         }
@@ -364,11 +364,11 @@ public class IFGoals extends root.IFTemplate {
                     int newV;
                     try {
                         newV = Integer.parseInt(tfPhy.getText());
-                    } catch(Exception ex) {
+                    } catch(NumberFormatException ex) {
                         newV = 0;
                     }
                     slPhy.setValue(newV);
-                    dsk.getRes().getGoals().setValPhy(newV);
+                    dsk.getRes().phyVal = newV;
                 }
             };
         }
@@ -382,11 +382,11 @@ public class IFGoals extends root.IFTemplate {
                     int newV;
                     try{
                         newV = Integer.parseInt(tfMen.getText());
-                    } catch(Exception ex) {
+                    } catch(NumberFormatException ex) {
                         newV=0;
                     }
                     slMen.setValue(newV);
-                    dsk.getRes().getGoals().setValMen(newV);
+                    dsk.getRes().menVal = newV;
                 }
             };
         }
@@ -400,11 +400,11 @@ public class IFGoals extends root.IFTemplate {
                     int newV;
                     try {
                         newV = Integer.parseInt(tfSoc.getText());
-                    } catch(Exception ex) {
+                    } catch(NumberFormatException ex) {
                         newV=0;
                     }
                     slSoc.setValue(newV);
-                    dsk.getRes().getGoals().setValSoc(newV);
+                    dsk.getRes().socVal = newV;
                 }
             };
         }
@@ -418,11 +418,11 @@ public class IFGoals extends root.IFTemplate {
                     int newV;
                     try {
                         newV = Integer.parseInt(tfMag.getText());
-                    } catch(Exception ex) {
+                    } catch(NumberFormatException ex) {
                         newV=0;
                     }
                     slMag.setValue(newV);
-                    dsk.getRes().getGoals().setValMag(newV);
+                    dsk.getRes().magVal = newV;
                 }
             };
         }
@@ -436,11 +436,11 @@ public class IFGoals extends root.IFTemplate {
                     int newV;
                     try {
                         newV = Integer.parseInt(tfCombinedAttr.getText());
-                    } catch(Exception ex) {
+                    } catch(NumberFormatException ex) {
                         newV=0;
                     }
                     slCombinedAttr.setValue(newV);
-                    dsk.getRes().getGoals().setValTotal(newV);
+                    dsk.getRes().total = newV;
                 }
             };
         }
@@ -454,11 +454,11 @@ public class IFGoals extends root.IFTemplate {
                     int newV;
                     try {
                         newV = Integer.parseInt(tfYear.getText());
-                    } catch(Exception ex) {
+                    } catch(NumberFormatException ex) {
                         newV=0;
                     }
                     slYear.setValue(newV);
-                    dsk.getRes().getGoals().setDuration(newV);
+                    dsk.getRes().duration = newV;
                 }
             };
         }
@@ -472,11 +472,11 @@ public class IFGoals extends root.IFTemplate {
                     int newV;
                     try {
                         newV = Integer.parseInt(tfNrGoals.getText());
-                    } catch(Exception ex) {
+                    } catch(NumberFormatException ex) {
                         newV=0;
                     }
                     slNrGoals.setValue(newV);
-                    dsk.getRes().getGoals().setNrGoals(newV);
+                    dsk.getRes().nrGoals = newV;
                 }
             };
         }

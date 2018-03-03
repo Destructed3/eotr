@@ -80,7 +80,7 @@ public class IFTuition extends root.IFTemplate {
     //topP
     private JSlider slTit() {
         if(slTit==null) {
-            slTit = new JSlider(100,1000,dsk.getRes().getVariables().getStudyFee());
+            slTit = new JSlider(100,1000,dsk.getRes().studyFee);
             slTit.setMinorTickSpacing(100);
             slTit.setMajorTickSpacing(250);
             slTit.setPaintTicks(true);
@@ -103,7 +103,7 @@ public class IFTuition extends root.IFTemplate {
     }
     private JTextField tfTit() {
         if(tfTit==null) {
-            tfTit = new JTextField(String.valueOf(dsk.getRes().getVariables().getStudyFee()));
+            tfTit = new JTextField(String.valueOf(dsk.getRes().studyFee));
             tfTit.setPreferredSize(new java.awt.Dimension(35, 20));
             tfTit.addActionListener(inputTF());
         }
@@ -146,7 +146,7 @@ public class IFTuition extends root.IFTemplate {
                     if(mOK==JOptionPane.YES_NO_OPTION) {
                         JOptionPane.showMessageDialog(null, "Changes saved!", "Changes saved", JOptionPane.INFORMATION_MESSAGE);
                         slTit.setValue(newV);
-                        dsk.getRes().getVariables().setStudyFee(newV);
+                        dsk.getRes().studyFee = newV;
                         actualiseLabel();
                     }
                 } else if(newV>1000){
@@ -168,7 +168,7 @@ public class IFTuition extends root.IFTemplate {
     //mainP
     private JLabel lFees() {
         if(lFees==null) {
-            lFees = new JLabel(String.valueOf(dsk.getRes().getVariables().getStudyFee()*nrStud()));
+            lFees = new JLabel(String.valueOf(dsk.getRes().studyFee*nrStud()));
         }
         return lFees;
     }
@@ -191,24 +191,24 @@ public class IFTuition extends root.IFTemplate {
         return lCantPay_longterm;
     }
     private long nrStud() {
-        return dsk.getRes().getLStu().stream().filter(pStu -> !pStu.isFormer()).count();
+        return dsk.getRes().lStu.stream().filter(pStu -> !pStu.isFormer()).count();
     }
     private long getCantPay_upcoming() {
-        return dsk.getRes().getLStu().stream().filter(pStu -> 
-                pStu.getGold()<dsk.getRes().getVariables().getStudyFee()).count();
+        return dsk.getRes().lStu.stream().filter(pStu -> 
+                pStu.getGold()<dsk.getRes().studyFee).count();
     }
     private long getCantPay_longterm() {
-        return dsk.getRes().getLStu().stream().filter(pStu -> 
+        return dsk.getRes().lStu.stream().filter(pStu -> 
                 pStu.getGold()<yearsLeft(pStu)).count();
     }
     private int expFees() {
-        return (dsk.getRes().getLStu().size()+dsk.getRes().getVariables().getReputation()*3/4-(int)getCantPay_upcoming())*slTit.getValue();
+        return (dsk.getRes().lStu.size()+dsk.getRes().reputation * 3 / 4 - (int)getCantPay_upcoming())*slTit.getValue();
     }
     private int yearsLeft(resources.Inhabitants.InhStu stu) {
-        return dsk.getRes().getVariables().getStudyFee()*(dsk.getRes().getGoals().getDuration()-stu.getSemester());
+        return dsk.getRes().studyFee*(dsk.getRes().duration - stu.getSemester());
     }
     private void actualiseLabel() {
-        lFees.setText(String.valueOf(dsk.getRes().getVariables().getStudyFee()*nrStud()));
+        lFees.setText(String.valueOf(dsk.getRes().studyFee*nrStud()));
         lExpFees.setText(String.valueOf(expFees()));
         lCantPay_upcoming.setText(String.valueOf(getCantPay_upcoming()));
         lCantPay_longterm.setText(String.valueOf(getCantPay_longterm()));

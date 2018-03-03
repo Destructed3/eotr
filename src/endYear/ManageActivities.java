@@ -20,14 +20,14 @@ public class ManageActivities {
     public ManageActivities(Mainframe pdsk) {
         this.dsk=pdsk;
         this.ai=new ai.AI_Stu(dsk);
-        this.year=dsk.getRes().getVariables().getYear();
+        this.year=dsk.getRes().year;
         this.jeg = new JournalEntryGenerator();
     }
     
     public void processAct() {
         System.out.println("Do activities");
         System.out.println("Chose Activities");
-        dsk.getRes().getLStu().stream().filter(pStu -> !pStu.isFormer()).forEach(pStu -> {
+        dsk.getRes().lStu.stream().filter(pStu -> !pStu.isFormer()).forEach(pStu -> {
             pStu.setWorkTime(0);
             ai.choseActivity(pStu);
         });
@@ -38,7 +38,7 @@ public class ManageActivities {
     
     private void doCourses() {
         System.out.println("Do Courses");
-        dsk.getRes().getLAC().stream().filter(pAC -> 
+        dsk.getRes().lCourse.stream().filter(pAC -> 
                 pAC.isActive()).forEach(pAC -> {
             processCourse(pAC);
         });
@@ -48,12 +48,12 @@ public class ManageActivities {
         this.ac=pac;
         this.topic = ac.getTopic();
         if(ac.isActive()) {
-            tea = dsk.getRes().getLTea().stream().filter(pTea -> 
+            tea = dsk.getRes().lTea.stream().filter(pTea -> 
                     pTea.getNumber()==ac.getHostNr()).findFirst().get();
             tea.addEntry(jeg.generateCourseEntry(ac, tea).getText());
             
-            ac.getStudents().forEach(pAcc -> {
-                stu = dsk.getRes().getLStu().stream().filter(pStu -> 
+            ac.getStudents().forEach((int[] pAcc) -> {
+                stu = dsk.getRes().lStu.stream().filter(pStu ->
                         pStu.getNumber()==pAcc[0]).findFirst().get();
                 
                 pAcc[1] = stu.getAttribute(ac.getTopic());
@@ -68,7 +68,6 @@ public class ManageActivities {
                 pAcc[2]=stu.getAttribute(topic);
                 System.out.println("Improving "+stu.getNumber()+"'s "+topic+" to "+pAcc[2]);
                 pAcc[3]=(int)(stu.getLearn()*tea.getTeaching()*100);
-                
             });
             ac.setActive(false);
         }
@@ -83,7 +82,7 @@ public class ManageActivities {
     
     private void doJobs() {
         System.out.println("Do jobs");
-        dsk.getRes().getLAJ().stream().filter(pAJ -> 
+        dsk.getRes().lJob.stream().filter(pAJ -> 
                 pAJ.isActive()
                 && pAJ.getHostNr()!=0).forEach(pAJ -> {
                     System.out.println("Doing Job "+pAJ.getID());
@@ -100,38 +99,41 @@ public class ManageActivities {
     }
     
     private void collectJobIncome_Tea(ActivityJob aj) {
-        dsk.getRes().getAcc_year(year).addIncomeJob_Tea(aj.getIncome());
-        dsk.getRes().getVariables().addGold(aj.getIncome());
+        dsk.getRes().lAccounting.stream().filter(
+                pAcc -> pAcc.getYear()==year).findAny().get().addIncomeJob_Tea(aj.getIncome());
+        dsk.getRes().gold += aj.getIncome();
     }
     private void collectJobIncome_Stu(ActivityJob aj) {
-        stu = dsk.getRes().getLStu().stream().filter(pStu -> pStu.getNumber()==aj.getHostNr()).findAny().get();
+        stu = dsk.getRes().lStu.stream().filter(pStu -> pStu.getNumber()==aj.getHostNr()).findAny().get();
         stu.addGold(aj.getIncome());
     }
     
     private void generateJournalEntry(ActivityJob aj) {
         System.out.println("Generating Journal Entry Job "+aj.getID());
         System.out.println("for "+aj.getHostNr());
-        tea = dsk.getRes().getLTea().stream().filter(pTea -> pTea.getNumber()==aj.getHostNr()).findFirst().get();
+        tea = dsk.getRes().lTea.stream().filter(
+                pTea -> pTea.getNumber()==aj.getHostNr()).findFirst().get();
         
         tea.addEntry(jeg.generateJobEntry(tea,aj));
     }
     private void generateJournalEntry_stu(ActivityJob aj) {
         System.out.println("Generating Journal Entry Job "+aj.getID());
         System.out.println("for "+aj.getHostNr());
-        stu = dsk.getRes().getLStu().stream().filter(pStu -> pStu.getNumber()==aj.getHostNr()).findFirst().get();
+        stu = dsk.getRes().lStu.stream().filter(
+                pStu -> pStu.getNumber()==aj.getHostNr()).findFirst().get();
         stu.addEntry(jeg.generateJobEntry(stu,aj));
     }
     
     private void clearTT() {
-        dsk.getRes().getLTea().forEach(pTea -> {
+        dsk.getRes().lTea.forEach(pTea -> {
             pTea.resetTimeTable();
             pTea.setWorkTime(0);
         });
-        dsk.getRes().getLStu().forEach(pStu -> {
+        dsk.getRes().lStu.forEach(pStu -> {
             pStu.resetTimeTable();
             pStu.setWorkTime(0);
         });
-        dsk.getRes().getLRS().forEach(pRS -> {
+        dsk.getRes().lRoomStudy.forEach(pRS -> {
             pRS.resetRoomUsage();
         });
     }

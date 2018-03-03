@@ -197,10 +197,10 @@ public class IFTeacher extends root.IFTemplate {
         return alHire;
     }
     private boolean canPay() {
-        return dsk.getRes().getVariables().getGold()>tea.getCost()*6;
+        return dsk.getRes().gold>tea.getCost()*6;
     }
     private boolean isRoomAv() {
-        return dsk.getRes().getLRQ().stream().anyMatch(pRQ -> pRQ.getResident()==0);
+        return dsk.getRes().lRoomQuarter.stream().anyMatch(pRQ -> pRQ.getResident()==0);
     }
     
     private JButton btJournal() {
@@ -233,14 +233,14 @@ public class IFTeacher extends root.IFTemplate {
     private InhTea refreshTea() {
         int nr = tea.getNumber();
         if(tea.isFH()) {
-            for(InhTea pTea : dsk.getRes().getTfH()) {
+            for(InhTea pTea : dsk.getRes().teacherForHire) {
                 if(pTea.getNumber()==nr) {
                     return pTea;
                 }
             }
             return null;
         } else {
-            return dsk.getRes().getLTea().stream().filter(pTea -> pTea.getNumber()==nr).findAny().get();
+            return dsk.getRes().lTea.stream().filter(pTea -> pTea.getNumber()==nr).findAny().get();
         }
     }
     private String writeCell(int h, int d) {
@@ -283,13 +283,13 @@ public class IFTeacher extends root.IFTemplate {
         }
     }
     private String getAA(String id) {
-        return dsk.getRes().getLAA().stream().filter(pAA -> pAA.getID().equals(id)).findAny().get().getName();
+        return dsk.getRes().lAdv.stream().filter(pAA -> pAA.getID().equals(id)).findAny().get().getName();
     }
     private String getAC(String id) {
-        return dsk.getRes().getLAC().stream().filter(pAC -> pAC.getID().equals(id)).findAny().get().getName();
+        return dsk.getRes().lCourse.stream().filter(pAC -> pAC.getID().equals(id)).findAny().get().getName();
     }
     private String getAJ(String id) {
-        return dsk.getRes().getLAJ().stream().filter(pAJ -> pAJ.getID().equals(id)).findAny().get().getName();
+        return dsk.getRes().lJob.stream().filter(pAJ -> pAJ.getID().equals(id)).findAny().get().getName();
     }
     
     private IFJournal journal() {
