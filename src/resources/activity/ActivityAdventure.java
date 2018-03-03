@@ -29,7 +29,7 @@ public class ActivityAdventure extends Activity {
     int available;
     String description;
     int income;
-    Region region;
+    Region pRegion;
     Monster monster;
     int difficulty;
     int topic;
@@ -53,11 +53,11 @@ public class ActivityAdventure extends Activity {
     public int getIncome() {
         return income;
     }
-    public void setRegion(Region reg) {
-        this.region=reg;
+    public void setAdvRegion(Region reg) {
+        this.pRegion=reg;
     }
-    public Region getRegion() {
-        return region;
+    public Region getAdvRegion() {
+        return pRegion;
     }
     public void setMonster(Monster evil) {
         this.monster=evil;
@@ -101,9 +101,9 @@ public class ActivityAdventure extends Activity {
             pNR=String.valueOf(pnr);
         }
         this.id="AA"+pNR;
-        dsk.getRes().getLMon().stream().filter(pMon -> pMon.getID().equals(this.monster)).findAny().get().setCourse(this.id);
+        dsk.getRes().lMonster.stream().filter(pMon -> pMon.getID().equals(this.monster)).findAny().get().setCourse(this.id);
     }
     private boolean idUsed(int id, Mainframe dsk){
-        return dsk.getRes().getLAA().stream().anyMatch(pAdv -> Integer.parseInt(pAdv.getID().substring(2,7))==id);
+        return dsk.getRes().lAdv.stream().anyMatch(pAdv -> Integer.parseInt(pAdv.getID().substring(2,7))==id);
     }
 }

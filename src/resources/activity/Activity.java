@@ -25,10 +25,10 @@ public abstract class Activity implements Serializable {
         this.active=true;
     }
     
-    public void setRegion(Region re) {
+    public void setAdvRegion(Region re) {
         this.region=re;
     }
-    public Region getRegion() {
+    public Region getAdvRegion() {
         return region;
     }
         

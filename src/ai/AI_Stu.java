@@ -53,13 +53,13 @@ public class AI_Stu {
         createJob = new AI_Stu_choseJob();
         
         this.stu = pstu;
-        this.lac = dsk.getRes().getLAC();
-        this.laj = dsk.getRes().getLAJ();
-        this.laa = dsk.getRes().getLAA();
+        this.lac = dsk.getRes().lCourse;
+        this.laj = dsk.getRes().lJob;
+        this.laa = dsk.getRes().lAdv;
         
         this.lPref = new ArrayList();
         
-        stu.setJobDesire(dsk.getRes().getVariables().getStudyFee());
+        stu.setJobDesire(dsk.getRes().studyFee);
         stu.setAdvDesire();
         
         for(int i=0;i<6;i++) {
@@ -149,8 +149,8 @@ public class AI_Stu {
             aj.setIncome(dsk);
             stu.addActivity(aj);
             stu.setHappiness(stu.getHappiness()+15);
-            dsk.getRes().getLAJ().removeIf(pAJ -> pAJ.getID().equals(aj.getID()));
-            dsk.getRes().getLAJ().add(aj);
+            dsk.getRes().lJob.removeIf(pAJ -> pAJ.getID().equals(aj.getID()));
+            dsk.getRes().lJob.add(aj);
         }
     }
     
@@ -188,7 +188,7 @@ public class AI_Stu {
     }
     
     private boolean checkJobAv() {
-        return dsk.getRes().getLAJ().stream().anyMatch(pAJ -> pAJ.isActive() && pAJ.getHostNr()==0);
+        return dsk.getRes().lJob.stream().anyMatch(pAJ -> pAJ.isActive() && pAJ.getHostNr()==0);
     }
     private boolean dayAv(String[][] cTT) {
         for(int d=0;d<7;d++) {

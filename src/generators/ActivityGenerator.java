@@ -32,8 +32,8 @@ public class ActivityGenerator {
         for(int venue=0;venue<venues.length;venue++) {
             for(int jobType=0;jobType<4;jobType++) {
                 for(int jobCount=0;jobCount<avJobs[venue][jobType];jobCount++) {
-                    System.out.println("It's year "+dsk.getRes().getVariables().getYear());
-                    aj = new ActivityJob(getHeritage_string(venue),jobType,reg,dsk.getRes().getVariables().getYear());
+                    System.out.println("It's year "+dsk.getRes().year);
+                    aj = new ActivityJob(getHeritage_string(venue),jobType,reg,dsk.getRes().year);
                     createID_job();
                     aj.set_AObject();
                     System.out.println("Activity is set for year "+aj.getYear());
@@ -43,7 +43,7 @@ public class ActivityGenerator {
         }
     }
     private void addJob() {
-        dsk.getRes().getLAJ().add(aj);
+        dsk.getRes().lJob.add(aj);
         if(dsk.getMenuCourse()!=null) {
             dsk.getMenuCourse().setCourseNew(null);
         }
@@ -92,7 +92,7 @@ public class ActivityGenerator {
     }
     
     public void createID_job() {
-        String beginn = "AJ"+aj.getRegion().getName().substring(0,2);
+        String beginn = "AJ"+aj.getAdvRegion().getName().substring(0,2);
         System.out.println("Check ID beginning: "+beginn);
         if(checkBeginn(beginn,dsk)) {
             int nr=0;
@@ -124,10 +124,12 @@ public class ActivityGenerator {
     }
     private boolean checkBeginn(String beg, Mainframe dsk) {
         System.out.println("Compare with");
-        return dsk.getRes().getLReg().stream().anyMatch(reg -> reg.getID().substring(0,4).equals(beg));
+        return dsk.getRes().lRegion.stream().anyMatch(
+                region -> region.getID().substring(0,4).equals(beg));
     }
     private boolean checkNr(int nr, Mainframe dsk) {
-        return dsk.getRes().getLReg().stream().anyMatch(reg -> Integer.parseInt(reg.getID().substring(5,9))==nr);
+        return dsk.getRes().lRegion.stream().anyMatch(
+                region -> Integer.parseInt(region.getID().substring(5,9))==nr);
     }
     
     Mainframe dsk;

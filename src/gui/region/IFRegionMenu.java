@@ -73,7 +73,7 @@ public class IFRegionMenu extends root.IFTemplate {
     private List<IFRegion> getlIF_Regions() {
         if(lIF_Regions==null) {
             lIF_Regions = new ArrayList();
-            dsk.getRes().getLReg().stream().filter(pReg -> pReg.isKnown() && pReg.getStatus()!=Region.INVADED).forEach(pReg -> {
+            dsk.getRes().lRegion.stream().filter(pReg -> pReg.isKnown() && pReg.getStatus()!=Region.INVADED).forEach(pReg -> {
                 IFRegion jif = new IFRegion(pReg,dsk);
                 dsk.addJIF(jif);
                 lIF_Regions.add(jif);

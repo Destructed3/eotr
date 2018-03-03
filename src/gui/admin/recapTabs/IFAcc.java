@@ -56,14 +56,14 @@ public class IFAcc extends root.IFTemplate {
         return lAcc;
     }
     private void addTo_LAcc() {
-        dsk.getRes().getLAcc().forEach(acc -> {
+        dsk.getRes().lAccounting.forEach(acc -> {
             P_Acc p = new P_Acc(acc,dsk);
             getLAcc().add(p);
         });
     }
     
     public P_Acc getThisYear() {
-        return lAcc.stream().filter(jif -> jif.getAccounting().getYear()==dsk.getRes().getVariables().getYear()).findAny().get();
+        return lAcc.stream().filter(jif -> jif.getAccounting().getYear()==dsk.getRes().year).findAny().get();
     }
     
     Mainframe dsk;

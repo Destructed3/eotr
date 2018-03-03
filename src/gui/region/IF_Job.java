@@ -32,7 +32,7 @@ public class IF_Job extends root.IFTemplate {
     public IF_Job(Region preg,Mainframe pdsk,ActivityJob paj) {
         super(paj.getJob_string()+"-Job in "+preg.getName());
         this.dsk=pdsk;
-        this.tea = dsk.getRes().getLTea().get(0);
+        this.tea = dsk.getRes().lTea.get(0);
         this.reg=preg;
         this.selectedDay=0;
         this.aj=paj;
@@ -65,7 +65,7 @@ public class IF_Job extends root.IFTemplate {
     private JComboBox cbTea() {
         if(cbTea==null) {
             cbTea = new JComboBox();
-            dsk.getRes().getLTea().forEach(pTea -> {
+            dsk.getRes().lTea.forEach(pTea -> {
                 String output = 
                         pTea.getNumber()+" | "
                         +pTea.getName()+" | "
@@ -158,7 +158,7 @@ public class IF_Job extends root.IFTemplate {
         if(ilTea==null) {
             ilTea = ((ItemEvent e) -> {
                 String tNr = String.valueOf(cbTea.getSelectedItem());
-                tea = dsk.getRes().getLTea().stream().filter(pTea -> 
+                tea = dsk.getRes().lTea.stream().filter(pTea -> 
                         pTea.getNumber()==Integer.parseInt(tNr.substring(0, 5))).findAny().get();
                 renewTT();
             });
@@ -199,7 +199,7 @@ public class IF_Job extends root.IFTemplate {
         return al;
     }
     private boolean isJobAv() {
-        return dsk.getRes().getLReg().stream().anyMatch(pReg -> pReg.getID().equals(reg.getID()));
+        return dsk.getRes().lRegion.stream().anyMatch(pReg -> pReg.getID().equals(reg.getID()));
     }
     private void getJob() {
         tea.addActivity(takeJob());
@@ -209,14 +209,15 @@ public class IF_Job extends root.IFTemplate {
         String s = aj.getID();
         int teaNr = tea.getNumber();
         theJob(s).setHost(teaNr);
-        theJob(s).setRegion(reg); 
+        theJob(s).setAdvRegion(reg); 
         theJob(s).createID(dsk);
         theJob(s).setTimeTable(selectedDay);
         theJob(s).setIncome(dsk);
         return theJob(s);
     }
     private ActivityJob theJob(String id) {
-        return dsk.getRes().getJob(id);
+        return dsk.getRes().lJob.stream().filter(pJob -> 
+                pJob.getID().equals(id)).findAny().get();
     }
     private void removeJob() {
         dsk.getMenuRegion().getIFRegionMenu().getIFReg(reg.getID()).removeJob(this);
@@ -227,7 +228,7 @@ public class IF_Job extends root.IFTemplate {
             cbTea();
         } else {
             cbTea.removeAllItems();
-            dsk.getRes().getLTea().forEach(pTea -> {
+            dsk.getRes().lTea.forEach(pTea -> {
                 String output = pTea.getNumber()+" | "
                         +pTea.getName()+" | "
                         +pTea.getAttribute(0)+" | "

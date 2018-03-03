@@ -104,14 +104,16 @@ public class TimeTable extends DefaultTableModel {
         }
     }
     public String findAC(String id) {
-        return dsk.getRes().getLAC().stream().filter(ac -> 
+        return dsk.getRes().lCourse.stream().filter(ac -> 
                 ac.getID().equals(id)).findAny().get().getName();
     }
     public String findAA(String id) {
-        return dsk.getRes().getLAA().stream().filter(pAdv -> pAdv.getID().equals(id)).findAny().get().getName();
+        return dsk.getRes().lAdv.stream().filter(pAdv -> 
+                pAdv.getID().equals(id)).findAny().get().getName();
     }
     public String findAJ(String id) {
-        return dsk.getRes().getLAJ().stream().filter(pAJ -> pAJ.getID().equals(id)).findAny().get().getName();
+        return dsk.getRes().lJob.stream().filter(pAJ -> 
+                pAJ.getID().equals(id)).findAny().get().getName();
     }
     public void refresh(String[][] dat) {
         convertDat(dat);

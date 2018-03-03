@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import resources.Accounting;
 import resources.rooms.RoomDorm;
 import resources.rooms.RoomQuarter;
 import resources.rooms.RoomStudy;
@@ -213,8 +214,8 @@ public class IFRoomBuild extends JInternalFrame {
     private JButton btBRS(int size, int price) {
         JButton bt = new JButton(price+"g");
         bt.addActionListener((ActionEvent e) -> {
-            if(dsk.getRes().getVariables().getGold()>=price) {
-                dsk.getRes().getVariables().substractGold(price);
+            if(dsk.getRes().gold >= price) {
+                dsk.getRes().gold -= price;
                 if(size==30) {
                     lRS_small.setText(String.valueOf(getNr_RS_small()));
                 } else {
@@ -243,8 +244,8 @@ public class IFRoomBuild extends JInternalFrame {
         System.out.println(nr);
         System.out.println("Study Room Created. Save!");
         RoomStudy rs = new RoomStudy(name,size,nr);
-        dsk.getRes().getAcc_year(dsk.getRes().getVariables().getYear()).addRS(rs.getMaintenance(), rs.getBuildCost());
-        dsk.getRes().getLRS().add(rs);
+        this.getAccountingYear().addRS(rs.getMaintenance(), rs.getBuildCost());
+        dsk.getRes().lRoomStudy.add(rs);
         resetMenues();
         if(dsk.getMenuRooms()!=null) {
             dsk.getMenuRooms().getStudy().addRoom(rs);
@@ -256,14 +257,14 @@ public class IFRoomBuild extends JInternalFrame {
         }
     }
     private boolean getSRoomNr(int nr) {
-        return dsk.getRes().getLRS().stream().anyMatch(pRS -> pRS.getRoomNr()==nr);
+        return dsk.getRes().lRoomStudy.stream().anyMatch(pRS -> pRS.getRoomNr()==nr);
     }
     private JButton btBRQ() {
         JButton bt = new JButton("400g");
         bt.addActionListener((ActionEvent e) -> {
-            if(dsk.getRes().getVariables().getGold()>=400) {
+            if(dsk.getRes().gold>=400) {
                 addRoomQuarter();
-                dsk.getRes().getVariables().substractGold(400);
+                dsk.getRes().gold -= 400;
                 lRQ.setText(String.valueOf(getNr_Q()));
                 getMaint();
                 JOptionPane.showMessageDialog(null, "Room built", "Lucky Bastard...", JOptionPane.INFORMATION_MESSAGE);
@@ -280,22 +281,22 @@ public class IFRoomBuild extends JInternalFrame {
             nr++;
         }
         RoomQuarter rq = new RoomQuarter(name,nr);
-        dsk.getRes().getLRQ().add(rq);
-        dsk.getRes().getAcc_year(dsk.getRes().getVariables().getYear()).addRQ(rq.getMaintenance(), rq.getBuildCost());
+        dsk.getRes().lRoomQuarter.add(rq);
+        this.getAccountingYear().addRQ(rq.getMaintenance(), rq.getBuildCost());
         if(dsk.getMenuRooms()!=null) {
             dsk.getMenuRooms().getQu().addRoom(rq);
         }
         resetMenues();
     }
     private boolean getQNr(int nr) {
-        return dsk.getRes().getLRQ().stream().anyMatch(ppRQ -> ppRQ.getRoomNr()==nr);
+        return dsk.getRes().lRoomQuarter.stream().anyMatch(ppRQ -> ppRQ.getRoomNr()==nr);
     }
     private JButton btBRD(int size, int price) {
         JButton bt = new JButton(price+"g");
         bt.addActionListener((ActionEvent e) -> {
-            if(dsk.getRes().getVariables().getGold()>=price) {
+            if(dsk.getRes().gold>=price) {
                 addRoomDorm(size);
-                dsk.getRes().getVariables().substractGold(price);
+                dsk.getRes().gold -= price;
                 if(size==30) {
                     lRD_small.setText(String.valueOf(getNr_RD_small()));
                 } else {
@@ -320,27 +321,27 @@ public class IFRoomBuild extends JInternalFrame {
             nr=1;
         }
         RoomDorm rd = new RoomDorm(name, size,nr);
-        dsk.getRes().getLRD().add(rd);
-        dsk.getRes().getAcc_year(dsk.getRes().getVariables().getYear()).addRD(rd.getMaintenance(), rd.getBuildCost());
+        dsk.getRes().lRoomDorm.add(rd);
+        this.getAccountingYear().addRD(rd.getMaintenance(), rd.getBuildCost());
         resetMenues();
         if(dsk.getMenuRooms()!=null) {
             dsk.getMenuRooms().getDorm().addRoom(rd);
         }
     }
     private boolean getRDNr(int nr) {
-        return dsk.getRes().getLRD().stream().anyMatch(pRD -> pRD.getRoomNr()==nr);
+        return dsk.getRes().lRoomDorm.stream().anyMatch(pRD -> pRD.getRoomNr()==nr);
     }
     
     public void getMaint() {
         maintenance = 0;
-        if(!dsk.getRes().getLRD().isEmpty()) {
-            dsk.getRes().getLRD().forEach(rD -> addMaint(rD));
+        if(!dsk.getRes().lRoomDorm.isEmpty()) {
+            dsk.getRes().lRoomDorm.forEach(rD -> addMaint(rD));
         }
-        if(!dsk.getRes().getLRQ().isEmpty()) {
-            dsk.getRes().getLRQ().forEach(rQ -> addMaint(rQ));
+        if(!dsk.getRes().lRoomQuarter.isEmpty()) {
+            dsk.getRes().lRoomQuarter.forEach(rQ -> addMaint(rQ));
         }
-        if(!dsk.getRes().getLRS().isEmpty()) {
-            dsk.getRes().getLRS().forEach(rS -> addMaint(rS));
+        if(!dsk.getRes().lRoomStudy.isEmpty()) {
+            dsk.getRes().lRoomStudy.forEach(rS -> addMaint(rS));
         }
         lMaint.setText(String.valueOf(maintenance)+"g/Year");
     }
@@ -348,21 +349,21 @@ public class IFRoomBuild extends JInternalFrame {
         maintenance = maintenance+room.getMaintenance();
     }
     private long getNr_RS_small() {
-        return dsk.getRes().getLRS().stream().filter(pRS -> pRS.getRoomSize()==30).count();
+        return dsk.getRes().lRoomStudy.stream().filter(pRS -> pRS.getRoomSize()==30).count();
     }
     private long getNr_RS_big() {
-        return dsk.getRes().getLRS().stream().filter(pRS -> pRS.getRoomSize()==100).count();
+        return dsk.getRes().lRoomStudy.stream().filter(pRS -> pRS.getRoomSize()==100).count();
     }
     private int getNr_Q() {
-        return dsk.getRes().getLRQ().size();
+        return dsk.getRes().lRoomQuarter.size();
 
     }
     private long getNr_RD_small() {
-        return dsk.getRes().getLRD().stream().filter(pRD -> 
+        return dsk.getRes().lRoomDorm.stream().filter(pRD -> 
                     pRD.getRoomSize()==30).count();
     }
     private long getNr_RD_big() {
-        return dsk.getRes().getLRD().stream().filter(pRD -> 
+        return dsk.getRes().lRoomDorm.stream().filter(pRD -> 
                     pRD.getRoomSize()==100).count();
     }
     
@@ -374,5 +375,9 @@ public class IFRoomBuild extends JInternalFrame {
         if(dsk.getMenuAdmin()!=null) {
             dsk.getMenuAdmin().getIFAcc().getThisYear().renewTables();
         }
+    }
+    
+    private Accounting getAccountingYear() {
+        return dsk.getRes().lAccounting.stream().filter(pAcc -> pAcc.getYear()==dsk.getRes().year).findAny().get();
     }
 }

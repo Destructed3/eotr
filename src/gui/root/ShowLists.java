@@ -112,14 +112,14 @@ public class ShowLists extends root.IFTemplate {
     }
     private void activateTea(DefaultListModel lm) {
         lm.clear();
-        dsk.getRes().getLTea().forEach(pTea -> {
+        dsk.getRes().lTea.forEach(pTea -> {
             String output = pTea.getNumber()+" | "+pTea.getName();
             lm.addElement(output);
         });
     }
     private void activateStu(DefaultListModel lm) {
         lm.clear();
-        dsk.getRes().getLStu().forEach(pStu -> {
+        dsk.getRes().lStu.forEach(pStu -> {
             String output = pStu.getNumber()+" | "+pStu.getName()+" | "+isFormer(pStu);
             lm.addElement(output);
         });
@@ -147,28 +147,28 @@ public class ShowLists extends root.IFTemplate {
     }
     private void activateRStudy(DefaultListModel lm) {
         lm.clear();
-        dsk.getRes().getLRS().forEach(pRS -> {
+        dsk.getRes().lRoomStudy.forEach(pRS -> {
             String output = pRS.getRoomNr()+" | "+pRS.getRoomName();
             lm.addElement(output);
         });
     }
     private void activateRDorm(DefaultListModel lm) {
         lm.clear();
-        dsk.getRes().getLRD().forEach(pRD -> {
+        dsk.getRes().lRoomDorm.forEach(pRD -> {
             String output = pRD.getRoomNr()+" | "+pRD.getRoomName();
             lm.addElement(output);
         });
     }
     private void activateRQuarter(DefaultListModel lm) {
         lm.clear();
-        dsk.getRes().getLRQ().forEach(pRQ -> {
+        dsk.getRes().lRoomQuarter.forEach(pRQ -> {
             String output = pRQ.getRoomNr()+" | "+pRQ.getRoomName();
             lm.addElement(output);
         });
     }
     private void activateACourse(DefaultListModel lm) {
         lm.clear();
-        dsk.getRes().getLAC().forEach(pAC -> {
+        dsk.getRes().lCourse.forEach(pAC -> {
             String output = pAC.getID()+" | "+pAC.getName()+" | "
                     +pAC.getTopicN()+" | Still active: "+pAC.isActive();
             lm.addElement(output);

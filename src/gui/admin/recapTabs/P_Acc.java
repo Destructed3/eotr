@@ -30,7 +30,7 @@ public class P_Acc extends JPanel {
         super();
         this.acc=pacc;
         this.dsk=pdsk;
-        this.thisYear=pdsk.getRes().getVariables().getYear()==acc.getYear();
+        this.thisYear=pdsk.getRes().year == acc.getYear();
         run();
     }
     
@@ -118,7 +118,7 @@ public class P_Acc extends JPanel {
     
     private int getInc_Jobs() {
         int inc_job = 0;
-        for(ActivityJob aj : dsk.getRes().getLAJ()) {
+        for(ActivityJob aj : dsk.getRes().lJob) {
             inc_job=inc_job+aj.getIncome();
         }
         return inc_job;
@@ -193,9 +193,9 @@ public class P_Acc extends JPanel {
         if(expenses==null) {
             String[][] s ={
                 {"Teacher Wages",String.valueOf(getTeaWages())},
-                {"Upkeep studys",String.valueOf(getMaintRS())},
-                {"Upkeep Quarters",String.valueOf(getMaintRQ())},
-                {"Upkeep Dorms",String.valueOf(getMaintRD())},
+                {"Upkeep studys",String.valueOf(getMaintRoomsStudy())},
+                {"Upkeep Quarters",String.valueOf(getMaintRoomsQuarter())},
+                {"Upkeep Dorms",String.valueOf(getMaintRoomsDorm())},
                 {"Build costs",""},
                 {"-> Studys",String.valueOf(acc.getCostNewRS())},
                 {"-> Quarters",String.valueOf(acc.getCostNewRQ())},
@@ -209,28 +209,28 @@ public class P_Acc extends JPanel {
     
     private int getTeaWages() {
         int tea_wages=0;
-        for(InhTea tea : dsk.getRes().getLTea()) {
+        for(InhTea tea : dsk.getRes().lTea) {
             tea_wages=tea_wages+tea.getCost();
         }
         return tea_wages;
     }
-    private int getMaintRS() {
+    private int getMaintRoomsStudy() {
         int maint_rs=0;
-        for(RoomStudy rs : dsk.getRes().getLRS()) {
+        for(RoomStudy rs : dsk.getRes().lRoomStudy) {
             maint_rs=maint_rs+rs.getMaintenance();
         }
         return maint_rs;
     }
-    private int getMaintRQ() {
+    private int getMaintRoomsQuarter() {
         int maint_rq=0;
-        for(RoomQuarter rq : dsk.getRes().getLRQ()) {
+        for(RoomQuarter rq : dsk.getRes().lRoomQuarter) {
             maint_rq=maint_rq+rq.getMaintenance();
         }
         return maint_rq;
     }
-    private int getMaintRD() {
+    private int getMaintRoomsDorm() {
         int maint_rd=0;
-        for(RoomDorm rd : dsk.getRes().getLRD()) {
+        for(RoomDorm rd : dsk.getRes().lRoomDorm) {
             maint_rd=maint_rd+rd.getMaintenance();
         }
         return maint_rd;
@@ -241,7 +241,7 @@ public class P_Acc extends JPanel {
     }
     private int getSum_exp_ty() {
         return getTeaWages()
-                +getMaintRS()+getMaintRQ()+getMaintRD()+getExp_Adv()
+                +getMaintRoomsStudy()+getMaintRoomsQuarter()+getMaintRoomsDorm()+getExp_Adv()
                 +acc.getCostNewRS()+acc.getCostNewRQ()+acc.getCostNewRD();
     }
     
@@ -288,9 +288,9 @@ public class P_Acc extends JPanel {
     }
     private void renewExp() {
         tbExpenses.setValueAt(getTeaWages(),0,1);
-        tbExpenses.setValueAt(getMaintRS(), 1, 1);
-        tbExpenses.setValueAt(getMaintRQ(), 2, 1);
-        tbExpenses.setValueAt(getMaintRD(), 3, 1);
+        tbExpenses.setValueAt(getMaintRoomsStudy(), 1, 1);
+        tbExpenses.setValueAt(getMaintRoomsQuarter(), 2, 1);
+        tbExpenses.setValueAt(getMaintRoomsDorm(), 3, 1);
         tbExpenses.setValueAt(acc.getCostNewRS(), 5, 1);
         tbExpenses.setValueAt(acc.getCostNewRQ(), 6, 1);
         tbExpenses.setValueAt(acc.getCostNewRD(), 7, 1);

@@ -31,7 +31,7 @@ public class JournalEntryAdv {
     }
     
     private String adv_start_Exp() {
-        if(aa.getRegion().isKnown()) {
+        if(aa.getAdvRegion().isKnown()) {
             return adv_Exp_known();
         } else {
             return adv_Exp_unknown();
@@ -41,39 +41,39 @@ public class JournalEntryAdv {
     private String adv_Exp_known() {
         int i=r.nextInt(3);
         if(start) {
-            return "The region of "+aa.getRegion().getName()+" was our aim again."+getComplications();
+            return "The region of "+aa.getAdvRegion().getName()+" was our aim again."+getComplications();
         } else {
-            return "Today we proceeded to explore "+aa.getRegion().getName()+"."+getComplications();
+            return "Today we proceeded to explore "+aa.getAdvRegion().getName()+"."+getComplications();
         }
     }
     private String adv_Exp_unknown() {
         int i=r.nextInt(3);
         if(start) {
-            return "The region of "+aa.getRegion().getName()+" was explored by us."+getComplications();
+            return "The region of "+aa.getAdvRegion().getName()+" was explored by us."+getComplications();
         } else {
-            return "Today we explored "+aa.getRegion().getName()+"."+getComplications();
+            return "Today we explored "+aa.getAdvRegion().getName()+"."+getComplications();
         }
     }
     
     private String adv_start_Dun() {
         if(start) {
-            return "We went to the dungeon in "+aa.getRegion().getName()+"."+getComplications();
+            return "We went to the dungeon in "+aa.getAdvRegion().getName()+"."+getComplications();
         } else {
-            return "The dungeon we visited today was in "+aa.getRegion().getName()+"."+getComplications();
+            return "The dungeon we visited today was in "+aa.getAdvRegion().getName()+"."+getComplications();
         }        
     }
     private String adv_start_Hun() {
         if(start) {
-            return "We hunted "+aa.getMonster().getName()+" in "+aa.getRegion().getName()+" down."+getComplications();
+            return "We hunted "+aa.getMonster().getName()+" in "+aa.getAdvRegion().getName()+" down."+getComplications();
         } else {
-            return "This damn beast "+aa.getMonster().getName()+"! We hunted it in "+aa.getRegion().getName()+"."+getComplications();
+            return "This damn beast "+aa.getMonster().getName()+"! We hunted it in "+aa.getAdvRegion().getName()+"."+getComplications();
         }        
     }
     private String adv_start_Rec() {
         if(start) {
-            return "We tried to fight back the armies of darkness in "+aa.getRegion().getName()+"."+getComplications();
+            return "We tried to fight back the armies of darkness in "+aa.getAdvRegion().getName()+"."+getComplications();
         } else {
-            return "We went to "+aa.getRegion().getName()+"to free it from the evil that pleagues the land."+getComplications();
+            return "We went to "+aa.getAdvRegion().getName()+"to free it from the evil that pleagues the land."+getComplications();
         }        
     }
     

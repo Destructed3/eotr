@@ -51,7 +51,7 @@ public class IFRoomQuarterMenu extends JInternalFrame {
     }
     private void createIF() {
         lm = new DefaultListModel();
-        dsk.getRes().getLRQ().stream().forEach(rq -> {
+        dsk.getRes().lRoomQuarter.stream().forEach(rq -> {
             JInternalFrame jif = new IFRoomQuarter(rq,dsk);
             dsk.addJIF(jif);
             ifQ.add(jif);
@@ -60,7 +60,7 @@ public class IFRoomQuarterMenu extends JInternalFrame {
                 name="Empty";
             } else {
                 int nr=rq.getResident();
-                InhTea tea=dsk.getRes().getLTea().stream().filter(teac -> teac.getNumber()==nr).findFirst().get();
+                InhTea tea=dsk.getRes().lTea.stream().filter(teac -> teac.getNumber()==nr).findFirst().get();
                 name=tea.getName();
             }
             String output = rq.getRoomName()+" | Resident: "+name;
@@ -104,7 +104,7 @@ public class IFRoomQuarterMenu extends JInternalFrame {
                 res="Empty";
             } else {
                 int i=rq.getResident();
-                InhTea teac = dsk.getRes().getLTea().stream().filter(tea -> tea.getNumber()==i).findFirst().get();
+                InhTea teac = dsk.getRes().lTea.stream().filter(tea -> tea.getNumber()==i).findFirst().get();
                 res = teac.getName();
             }
             String output = rq.getRoomName()+" | Resident: "+res;

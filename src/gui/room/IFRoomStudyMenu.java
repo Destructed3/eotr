@@ -50,7 +50,7 @@ public class IFRoomStudyMenu extends JInternalFrame {
     private void createIF() {
         ifS = new ArrayList();
         lm = new DefaultListModel();
-        dsk.getRes().getLRS().stream().forEach(rs -> {
+        dsk.getRes().lRoomStudy.stream().forEach(rs -> {
             IFRoomStudy jif = new IFRoomStudy(rs,dsk);
             dsk.addJIF(jif);
             ifS.add(jif);

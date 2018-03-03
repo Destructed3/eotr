@@ -65,11 +65,11 @@ public class ActivityJob extends Activity {
     public void setIncome(Mainframe dsk) {
         System.out.println("Set income of Job "+this.id+" for "+this.hostNr);
         if(isHostTea()) {
-            InhTea tea = dsk.getRes().getLTea().stream().filter(pTea -> 
+            InhTea tea = dsk.getRes().lTea.stream().filter(pTea -> 
                     pTea.getNumber()==this.getHostNr()).findAny().get();
             this.income=tea.getAttribute(topic)*50;
         } else {
-            InhStu stu = dsk.getRes().getLStu().stream().filter(pStu -> 
+            InhStu stu = dsk.getRes().lStu.stream().filter(pStu -> 
                     pStu.getNumber()==hostNr).findAny().get();
             this.income=stu.getAttribute(topic)*25;
         }
@@ -99,9 +99,10 @@ public class ActivityJob extends Activity {
     }
     
     private boolean isAv(Mainframe dsk,String partID, int id) {
-        return dsk.getRes().getRegion(region.getID()).getL_Act().stream().filter(pAct -> 
-                pAct.getID().substring(0,4).equals(partID)).anyMatch(pAct -> 
-                        Integer.parseInt(pAct.getID().substring(5,9))==id);
+        return dsk.getRes().lRegion.stream().filter(pReg -> 
+                pReg.getID().equals(region.getID())).findAny().get().getL_Act().stream().filter(pAct -> 
+                        pAct.getID().substring(0,4).equals(partID)).anyMatch(pAct -> 
+                                Integer.parseInt(pAct.getID().substring(5,9))==id);
     }
     
     private String setName() {

@@ -21,10 +21,11 @@ public class ResourceBar extends JPanel {
     public ResourceBar(Mainframe pdsk) {  
         this.dsk=pdsk;
         resTea = new int[2];
-        resTea[0] = dsk.getRes().getVariables().getYear();
+        resTea[0] = dsk.getRes().year;
         resTea[1] = avSpaceRQ();
         resStu = new int[2];
-        resStu[0] = (int)dsk.getRes().getLStu().stream().filter(pStu -> !pStu.isFormer()).count();
+        resStu[0] = (int)dsk.getRes().lStu.stream().filter(pStu -> 
+                !pStu.isFormer()).count();
         resStu[1] = avSpaceRD();
         run();
     }
@@ -44,15 +45,15 @@ public class ResourceBar extends JPanel {
     private void run() {
         this.setLayout(new java.awt.FlowLayout());
         if(year==null) {
-            year = new JLabel("Year: "+dsk.getRes().getVariables().getYear()+" | ");
+            year = new JLabel("Year: " + dsk.getRes().year + " | ");
             this.add(year);
         }
         if(gold==null) {
-            gold = new JLabel("Gold: "+dsk.getRes().getVariables().getGold()+" | ");
+            gold = new JLabel("Gold: " + dsk.getRes().gold + " | ");
             this.add(gold);
         }
         if(income==null) {
-            income = new JLabel("Income: "+getIncome()+" | ");
+            income = new JLabel("Income: " + getIncome() + " | ");
             this.add(income);
         }
         if(upkeep==null) {
@@ -78,42 +79,43 @@ public class ResourceBar extends JPanel {
     }
     private int avSpaceRD() {
         int space=0;
-        for(resources.rooms.RoomDorm pRD : dsk.getRes().getLRD()) {
+        for(resources.rooms.RoomDorm pRD : dsk.getRes().lRoomDorm) {
             space=space+pRD.getRoomSize();
         }
         return space;
     }
     private int avSpaceRQ() {
         int space=0;
-        for(resources.rooms.RoomQuarter pRQ : dsk.getRes().getLRQ()) {
+        for(resources.rooms.RoomQuarter pRQ : dsk.getRes().lRoomQuarter) {
             space=space+pRQ.getRoomSize();
         }
         return space;
     }
     private int getIncome() {
-        return dsk.getRes().getVariables().getGold()*(int)dsk.getRes().getLStu().stream().filter(pStu -> !pStu.isFormer()).count();
+        return dsk.getRes().gold * (int)dsk.getRes().lStu.stream().filter(pStu -> 
+                !pStu.isFormer()).count();
     }
     private int getUpkeep() {
         int upk=0;
-        for(InhTea pTea : dsk.getRes().getLTea()) {
+        for(InhTea pTea : dsk.getRes().lTea) {
             upk=upk+pTea.getCost();
         }
-        for(RoomDorm pRD : dsk.getRes().getLRD()) {
+        for(RoomDorm pRD : dsk.getRes().lRoomDorm) {
             upk=upk+pRD.getMaintenance();
         }
-        for(RoomQuarter pRQ : dsk.getRes().getLRQ()) {
+        for(RoomQuarter pRQ : dsk.getRes().lRoomQuarter) {
             upk=upk+pRQ.getMaintenance();
         }
-        for(RoomStudy pRS : dsk.getRes().getLRS()) {
+        for(RoomStudy pRS : dsk.getRes().lRoomStudy) {
             upk=upk+pRS.getMaintenance();
         }
         return upk;
     }
     private int getNrTea() {
-        return dsk.getRes().getLTea().size();
+        return dsk.getRes().lTea.size();
     }
     private int getNrRQ() {
-        return dsk.getRes().getLRQ().size();
+        return dsk.getRes().lRoomQuarter.size();
     }
     
     public void setJLGold(int newG) {
@@ -137,14 +139,14 @@ public class ResourceBar extends JPanel {
         year.setText("Year: "+newY+" | ");
     }
     public void setJLTea_addTea() {        
-        resTea[0]=dsk.getRes().getLTea().size();
+        resTea[0]=dsk.getRes().lTea.size();
         tea.setText("Teacher: "+resTea[0]+"/"+resTea[1]+" | ");
     }
     public void setJLTea_addSpace() {
         tea.setText("Teacher: "+getNrTea()+"/"+getNrRQ()+" | ");
     }
     public void setJLStu_addStu() {
-        resStu[0]=dsk.getRes().getLStu().size();
+        resStu[0]=dsk.getRes().lStu.size();
         stu.setText("Students: "+resStu[0]+"/"+resStu[1]+" | ");
     }
     public void setJLStu_addSpace() {
@@ -152,6 +154,6 @@ public class ResourceBar extends JPanel {
         stu.setText("Students: "+resStu[0]+"/"+resStu[1]+" | ");
     }
     public void setJLCour_addCourse() {
-        courses.setText(("Courses: "+dsk.getRes().getLAC().size()));
+        courses.setText(("Courses: "+dsk.getRes().lCourse.size()));
     }
 }

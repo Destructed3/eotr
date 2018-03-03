@@ -35,7 +35,7 @@ public class TeaGen extends resources.Inhabitants.InhTea {
         double learn=plearn;   
         learn=learn/100;
         int teaNr=10000;                
-        while(getNrTea(dsk.getRes().getLTea(),teaNr))         {
+        while(getNrTea(dsk.getRes().lTea,teaNr))         {
             teaNr++;
         } 
         this.setName(ng.randomName(false));

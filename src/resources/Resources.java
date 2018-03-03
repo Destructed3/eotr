@@ -26,209 +26,53 @@ public class Resources {
     public Resources() {        
     }
     
-    public void setVariables(Variables pVar) {
-        this.var=pVar;
-    }
-    public Variables getVariables() {
-        if(var==null) {
-            var = new Variables();
-        }
-        return var;
-    }
+    // Variables
+    public int year;
+    public int gold;
+    public int reputation;    
+    public int studyFee;
     
+    // Goals
+    public boolean isPhy;
+    public boolean isMen;
+    public boolean isSoc;
+    public boolean isMag;
+    public boolean isTotal;
+    public boolean isCP;
+    public boolean isNrGoals;
+    public boolean isDuration;
     
-    public void setGoals(Goals pGoals) {
-        this.goals=pGoals;
-    }
-    public Goals getGoals() {
-        return goals;
-    }
+    public int phyVal;
+    public int menVal;
+    public int socVal;
+    public int magVal;
+    public int total;
+    public int nrCP;
+    public int nrGoals;
+    public int duration;
     
+    // Lists    
+    public List<InhTea> lTea = null;
+    public List<InhStu> lStu = null;
     
-    public void setLTea(List<InhTea> pLTea) {
-        this.lTea=pLTea;
-    }
-    public void addTea(InhTea pTea) {
-        lTea.add(pTea);
-    }
-    public List<InhTea> getLTea() {
-        return lTea;
-    }
+    public List<RoomStudy> lRoomStudy = null;
+    public List<RoomQuarter> lRoomQuarter = null;
+    public List<RoomDorm> lRoomDorm = null;
     
-    public void setLStu(List<InhStu> pLStu) {
-        this.lStu=pLStu;
-    }
-    public void addStu(InhStu pStu) {
-        this.lStu.add(pStu);
-    }
-    public List<InhStu> getLStu() {
-        return lStu;
-    }
+    public List<ActivityCourse> lCourse = null;
+    public List<ActivityAdventure> lAdv = null;
+    public List<ActivityJob> lJob = null;
     
+    public List<Region> lRegion = null;
     
-    public void setLRS(List<RoomStudy> pLRS) {
-        this.lRoomStudy=pLRS;
-    }
-    public void adRS(RoomStudy pRS) {
-        this.lRoomStudy.add(pRS);
-    }
-    public List<RoomStudy> getLRS() {
-        return lRoomStudy;
-    }
+    public List<Messages> lMssg = null;
+    public List<Monster> lMonster = null;
     
-    public void setLRQ(List<RoomQuarter> pLRQ) {
-        this.lRoomQuarter=pLRQ;
-    }
-    public void addRQ(RoomQuarter pRQ) {
-        this.lRoomQuarter.add(pRQ);
-    }
-    public List<RoomQuarter> getLRQ() {
-        return lRoomQuarter;
-    }
+    public List<resources.Accounting> lAccounting = null;
     
-    public void setLRD(List<RoomDorm> pLRD) {
-        this.lRoomDorm=pLRD;
-    }
-    public void addRD(RoomDorm pRD) {
-        this.lRoomDorm.add(pRD);
-    }
-    public List<RoomDorm> getLRD() {
-        return lRoomDorm;
-    }
+    public InhTea[] teacherForHire = null;
     
-        
-    public void setLAA(List<ActivityAdventure> pLAA) {
-        this.lAdv=pLAA;
-    }
-    public ActivityAdventure getAdv(String id) {
-        return lAdv.stream().filter(pAdv -> pAdv.getID().equals(id)).findAny().get();
-    }
-    public List<ActivityAdventure> getLAA() {
-        return lAdv;
-    }
-    public void addAdventure(ActivityAdventure adv) {
-        this.lAdv.add(adv);
-    }
+    public List<FeatsDeeds> lFeatsDeeds = null;
+    public List<FeatsBackground> lFeatsBackground = null;
     
-    public void setLAC(List<ActivityCourse> pLAC) {
-        this.lCourse=pLAC;
-    }
-    public void addAC(ActivityCourse pAC) {
-        this.lCourse.add(pAC);
-    }
-    public List<ActivityCourse> getLAC() {
-        return lCourse;
-    }
-    
-    public void setLAJ(List<ActivityJob> pLAJ) {
-        this.lJob=pLAJ;
-    }
-    public void addJob(ActivityJob pAJ) {
-        this.lJob.add(pAJ);
-    }
-    public ActivityJob getJob(String jobID) {
-        return lJob.stream().filter(pJob -> pJob.getID().equals(jobID)).findAny().get();
-    }
-    public List<ActivityJob> getLAJ() {
-        return lJob;
-    }
-    
-    
-    public void setLReg(List<Region> pReg) {
-        this.lReg=pReg;
-    }
-    public Region getRegion(String id) {
-        return lReg.stream().filter(pReg -> pReg.getID().equals(id)).findAny().get();
-    }
-    public List<Region> getLReg() {
-        return lReg;
-    }
-    public void addRegion(Region reg) {
-        lReg.add(reg);
-    }
-    
-    
-    public void setAcc(List<Accounting> pAcc) {
-        this.lAccounting=pAcc;
-    }
-    public void addAcc(Accounting acc) {
-        this.lAccounting.add(acc);
-    }
-    public List<Accounting> getLAcc() {
-        return lAccounting;
-    }
-    public Accounting getAcc_year(int year) {
-        return lAccounting.stream().filter(pAcc -> pAcc.getYear()==year).findAny().get();
-    }
-    
-    
-    public List<Monster> getLMon() {
-        return lMon;
-    }
-    public void setLMon(List<Monster> pMon) {
-        this.lMon=pMon;
-    }
-    public Monster getMonster(String mID) {
-        return lMon.stream().filter(pMon -> pMon.getID().equals(mID)).findAny().get();
-    }
-    public void addMonster(Monster mon) {
-        lMon.add(mon);
-    }
-    
-    public void setLMssg(List<Messages> pMes) {
-        this.lMssg=pMes;
-    }
-    public Messages getMssg(int mssgNr) {
-        return lMssg.get(mssgNr);
-    }
-    public List<Messages> getMssgs() {
-        return lMssg;
-    }
-    
-    public void setTfH(InhTea[] pTFH) {
-        this.teaFH=pTFH;
-    }
-    public InhTea[] getTfH() {
-        return teaFH;
-    }
-    
-    public void setLDeeds(List<FeatsDeeds> pDee) {
-        this.lFeatsDeeds=pDee;
-    }
-    public List<FeatsDeeds> getLDeeds() {
-        return lFeatsDeeds;
-    }
-    
-    public List<FeatsBackground> getLBckg() {
-        return lFeatsBackground;
-    }
-    public void setLBckg(List<FeatsBackground> pBckg) {
-        this.lFeatsBackground=pBckg;
-    }
-    
-    Variables var = null;
-    Goals goals = null;
-    
-    List<InhTea> lTea = null;
-    List<InhStu> lStu = null;
-    
-    List<RoomStudy> lRoomStudy = null;
-    List<RoomQuarter> lRoomQuarter = null;
-    List<RoomDorm> lRoomDorm = null;
-    
-    List<ActivityCourse> lCourse = null;
-    List<ActivityAdventure> lAdv = null;
-    List<ActivityJob> lJob = null;
-    
-    List<Region> lReg = null;
-    
-    List<Messages> lMssg = null;
-    List<Monster> lMon = null;
-    
-    List<resources.Accounting> lAccounting = null;
-    
-    InhTea[] teaFH = null;
-    
-    List<FeatsDeeds> lFeatsDeeds = null;
-    List<FeatsBackground> lFeatsBackground = null;
 }

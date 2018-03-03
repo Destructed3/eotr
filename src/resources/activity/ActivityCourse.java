@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ActivityCourse extends Activity {
     public ActivityCourse(String pName, int pTeacher, int pRoom, int dur, int pSize, int top, String[][] pTimeTable, Mainframe dsk) {
-        super(pTeacher,dsk.getRes().getVariables().getYear());
+        super(pTeacher,dsk.getRes().year);
         this.name=pName;
         this.room=pRoom;
         this.duration=dur;
@@ -119,7 +119,7 @@ public class ActivityCourse extends Activity {
         return "AC"+pNR;
     }
     private boolean isID_used(Mainframe dsk, int id) {
-        return dsk.getRes().getLAC().stream().anyMatch(pAC -> Integer.parseInt(pAC.getID().substring(3,7))==id);
+        return dsk.getRes().lCourse.stream().anyMatch(pAC -> Integer.parseInt(pAC.getID().substring(3,7))==id);
     }
     private boolean[][] convertTT(String[][] dat) {
         System.out.println("Create Course: convert String dat to booelan TimeTable");

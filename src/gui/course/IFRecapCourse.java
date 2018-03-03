@@ -46,7 +46,7 @@ public class IFRecapCourse extends root.IFTemplate {
     private void setListStu() {
         lmStu = new DefaultListModel();
         ac.getStudents().forEach(cAcc -> {
-            InhStu stu = dsk.getRes().getLStu().stream().filter(pStu -> pStu.getNumber()==cAcc[0]).findFirst().get();
+            InhStu stu = dsk.getRes().lStu.stream().filter(pStu -> pStu.getNumber()==cAcc[0]).findFirst().get();
             String output = stu.getNumber()+" | "+stu.getName()+" | "+ac.getTopicN()+": "+cAcc[1]+" -> "+cAcc[2]+" ("+cAcc[3]+"% Learn-Efficiency)"+" | "+stu.getWorkTime()+"h";
             lmStu.addElement(output);
         });

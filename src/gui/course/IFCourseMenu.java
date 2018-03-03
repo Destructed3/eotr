@@ -66,7 +66,7 @@ public class IFCourseMenu extends IFTemplate {
     private void setList() {
         lm = new DefaultListModel();
         try {
-            dsk.getRes().getLAC().stream().forEach(ac -> {
+            dsk.getRes().lCourse.stream().forEach(ac -> {
                 String output = ac.getID()+"| "+ac.getName()+" | "+ac.getTopicN();
                 lm.addElement(output);
             });
@@ -79,7 +79,7 @@ public class IFCourseMenu extends IFTemplate {
     private void setList(List<String> cList) {
         lm = new DefaultListModel();
         try {
-            cList.forEach(cNr -> dsk.getRes().getLAC().stream().filter(ac -> 
+            cList.forEach(cNr -> dsk.getRes().lCourse.stream().filter(ac -> 
                     ac.getID().equals(cNr)).forEach(ac -> {
                         String output = ac.getID()+"| "+ac.getName()+" | "+ac.getTopicN();
                         lm.addElement(output);
@@ -91,9 +91,9 @@ public class IFCourseMenu extends IFTemplate {
         list.setSelectedIndex(0);
     }
     private void createIFC() {
-        if(dsk.getRes().getLAC().size()>0) {
+        if(dsk.getRes().lCourse.size()>0) {
             lifC = new ArrayList();
-            dsk.getRes().getLAC().forEach(pAC -> {
+            dsk.getRes().lCourse.forEach(pAC -> {
                 IFCourse jif = new IFCourse(pAC,dsk);
                 dsk.addJIF(jif);
                 lifC.add(jif);
@@ -125,7 +125,7 @@ public class IFCourseMenu extends IFTemplate {
     JButton btNewAC() {
         JButton bt = new JButton("Create Course");
         bt.addActionListener((ActionEvent e) -> {
-            if(!dsk.getRes().getLRS().isEmpty()) {
+            if(!dsk.getRes().lRoomStudy.isEmpty()) {
                 javax.swing.JInternalFrame jif = new IFCourseNew(dsk);
                 dsk.addJIF(jif);
                 jif.show();
@@ -144,7 +144,7 @@ public class IFCourseMenu extends IFTemplate {
                 lm.removeElementAt(0);
             }
         } catch(java.lang.ArrayIndexOutOfBoundsException e) {}
-        ActivityCourse ac = dsk.getRes().getLAC().get(dsk.getRes().getLAC().size()-1);
+        ActivityCourse ac = dsk.getRes().lCourse.get(dsk.getRes().lCourse.size()-1);
         IFCourse jif = new IFCourse(ac,dsk);
         dsk.addJIF(jif);
         lifC.add(jif);

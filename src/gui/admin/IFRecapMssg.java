@@ -21,9 +21,9 @@ import resources.Inhabitants.Inhabitants;
 public class IFRecapMssg extends root.IFTemplate {
     
     public IFRecapMssg(Mainframe pdsk) {
-        super("Year "+(pdsk.getRes().getVariables().getYear()-1)+" recap");
+        super("Year "+(pdsk.getRes().year - 1)+" recap");
         this.dsk=pdsk;
-        this.year=(pdsk.getRes().getVariables().getYear()-1);
+        this.year=(pdsk.getRes().year - 1);
         this.accounting=null;
         if(pdsk.getSave()==null) {
             runNG();
@@ -98,7 +98,7 @@ public class IFRecapMssg extends root.IFTemplate {
     }
     private JLabel lNGold() {
         if(lNGold==null) {
-            lNGold = new JLabel("New Treasure: "+dsk.getRes().getVariables().getGold());
+            lNGold = new JLabel("New Treasure: "+dsk.getRes().gold);
         }
         return lNGold;
     }
@@ -128,19 +128,19 @@ public class IFRecapMssg extends root.IFTemplate {
         return String.valueOf(0);
     }
     private String getLeaver() {
-        long l = dsk.getRes().getLStu().stream().filter(pStu 
+        long l = dsk.getRes().lStu.stream().filter(pStu 
                 -> (pStu.getLeaveTime()==year) 
                 && (pStu.getLeaveReason()!=Inhabitants.MET_STUDY_GOALS)).count();
         return String.valueOf(l);
     }
     private String getFinnisher() {
-        long l=dsk.getRes().getLStu().stream().filter(pStu -> 
+        long l=dsk.getRes().lStu.stream().filter(pStu -> 
                 pStu.getLeaveTime()==year &&
                 pStu.getLeaveReason()==Inhabitants.MET_STUDY_GOALS).count();
         return String.valueOf(l);
     }
     private String getNrStu() {
-        long l = dsk.getRes().getLStu().stream().filter(pStu -> !pStu.isFormer()).count();
+        long l = dsk.getRes().lStu.stream().filter(pStu -> !pStu.isFormer()).count();
         return String.valueOf(l);
     }
     
