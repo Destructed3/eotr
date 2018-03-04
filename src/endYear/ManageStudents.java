@@ -21,7 +21,7 @@ import resources.rooms.RoomDorm;
 public class ManageStudents {
     public ManageStudents(Mainframe pdsk) {
         this.dsk=pdsk;
-        this.year=dsk.getRes().year;
+        this.year=dsk.getData().year;
         this.acc_new = new Accounting(year+1);
         this.r = new Random();
     }
@@ -34,28 +34,28 @@ public class ManageStudents {
     }
     
     private void collectStudyFees() {
-        dsk.getRes().lStu.stream().filter(pStu -> 
+        dsk.getData().lStu.stream().filter(pStu -> 
                 !pStu.isFormer()).forEach(pStu -> {
-            if(pStu.getGold()>=dsk.getRes().studyFee) {
-                pStu.payFees(dsk.getRes().studyFee);
+            if(pStu.getGold()>=dsk.getData().studyFee) {
+                pStu.payFees(dsk.getData().studyFee);
                 pStu.setSemester(pStu.getSemester()+1);
-                acc_new.setTuitions(acc_new.getTuitions()+dsk.getRes().studyFee);
+                acc_new.setTuitions(acc_new.getTuitions()+dsk.getData().studyFee);
             } else {
                 pStu.setFormer(true);
                 pStu.setLeaveReason(Inhabitants.NO_GOLD);
-                dsk.getRes().reputation -= r.nextInt(2) + 3;
+                dsk.getData().reputation -= r.nextInt(2) + 3;
                 leavingStuds.add(pStu.getNumber());
             }
         });
-        dsk.getRes().lRoomDorm.forEach(pRD -> clearDorm(pRD));
+        dsk.getData().lRoomDorm.forEach(pRD -> clearDorm(pRD));
     }
     
     private void endStudy() {
-        dsk.getRes().lStu.forEach(pStu -> {
+        dsk.getData().lStu.forEach(pStu -> {
             checkStudyAims(pStu);
             checkHappyness(pStu);
         });
-        dsk.getRes().lRoomDorm.forEach(pRD -> clearDorm(pRD));
+        dsk.getData().lRoomDorm.forEach(pRD -> clearDorm(pRD));
     }
     private void checkHappyness(InhStu pStu) {
         if(pStu.getHappiness()<50) {
@@ -69,30 +69,30 @@ public class ManageStudents {
     }
     private void checkStudyAims(InhStu pStu) {
         int reachedGoals=0;
-        if(dsk.getRes().isPhy && pStu.getAttribute(0) >= dsk.getRes().phyVal) {
+        if(dsk.getData().isPhy && pStu.getAttribute(0) >= dsk.getData().phyVal) {
             reachedGoals++;
         }
-        if(dsk.getRes().isMen && pStu.getAttribute(1) >= dsk.getRes().menVal) {
+        if(dsk.getData().isMen && pStu.getAttribute(1) >= dsk.getData().menVal) {
             reachedGoals++;
         }
-        if(dsk.getRes().isSoc && pStu.getAttribute(2)>=dsk.getRes().socVal) {
+        if(dsk.getData().isSoc && pStu.getAttribute(2)>=dsk.getData().socVal) {
             reachedGoals++;
         }
-        if(dsk.getRes().isMag && pStu.getAttribute(3)>=dsk.getRes().magVal) {
+        if(dsk.getData().isMag && pStu.getAttribute(3)>=dsk.getData().magVal) {
             reachedGoals++;
         }
-        if(dsk.getRes().isTotal 
-                && pStu.getAttribute(0)+pStu.getAttribute(1)+pStu.getAttribute(2)+pStu.getAttribute(3) >= dsk.getRes().total) {
+        if(dsk.getData().isTotal 
+                && pStu.getAttribute(0)+pStu.getAttribute(1)+pStu.getAttribute(2)+pStu.getAttribute(3) >= dsk.getData().total) {
             reachedGoals++;
         }
-        if(dsk.getRes().isDuration && pStu.getSemester() >= dsk.getRes().duration) {
+        if(dsk.getData().isDuration && pStu.getSemester() >= dsk.getData().duration) {
             reachedGoals++;
         }
-        if(dsk.getRes().isNrGoals && reachedGoals >= dsk.getRes().nrGoals) {
+        if(dsk.getData().isNrGoals && reachedGoals >= dsk.getData().nrGoals) {
             pStu.setFormer(true);
             pStu.setLeaveReason(Inhabitants.MET_STUDY_GOALS);
             pStu.setStayTime(pStu.getStayTime()+1);
-            dsk.getRes().reputation += r.nextInt(5)+5;
+            dsk.getData().reputation += r.nextInt(5)+5;
             finishedStuds.add(pStu.getNumber());
         }
     }
@@ -104,13 +104,13 @@ public class ManageStudents {
         lRemove.forEach(nrStu -> rd.removeInhabitant(nrStu));
     }
     private boolean stu_isFormer(int nrS) {
-        return dsk.getRes().lStu.stream().anyMatch(pStu -> pStu.getNumber()==nrS && pStu.isFormer());
+        return dsk.getData().lStu.stream().anyMatch(pStu -> pStu.getNumber()==nrS && pStu.isFormer());
     }
     
     private void newStudents() {
         int pSNr;
-        if(5<dsk.getRes().reputation) {
-            pSNr = dsk.getRes().reputation / 2;
+        if(5<dsk.getData().reputation) {
+            pSNr = dsk.getData().reputation / 2;
         } else {
             pSNr = 5;
         }
@@ -119,11 +119,11 @@ public class ManageStudents {
         for(int i=0;i<sNr;i++) {
             try {
                 InhStu pStu = new generators.StuGen(dsk, 1);
-                dsk.getRes().lStu.add(pStu);
+                dsk.getData().lStu.add(pStu);
             } catch(Exception e) {
             }
         }
-        for(RoomDorm pRD : dsk.getRes().lRoomDorm) {
+        for(RoomDorm pRD : dsk.getData().lRoomDorm) {
             if(pRD.getRoomSize()>pRD.getAllInhabitants().size()) {
                 availableSpace = availableSpace+pRD.getRoomSize()-pRD.getAllInhabitants().size();
             }

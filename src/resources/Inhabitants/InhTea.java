@@ -125,6 +125,6 @@ public class InhTea extends Inhabitants implements Serializable {
         return nr;
     }
     private boolean checkNr(int nr, Mainframe dsk) {
-        return dsk.getRes().lTea.stream().anyMatch(pTea -> pTea.getNumber()==nr);
+        return dsk.getData().lTea.stream().anyMatch(pTea -> pTea.getNumber()==nr);
     }
 }

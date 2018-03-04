@@ -61,7 +61,7 @@ public class IFRoomQuarter extends JInternalFrame {
             jlI = new JLabel("Room is Empty");
         } else {
             int nr = rq.getResident();
-            InhTea teac = dsk.getRes().lTea.stream().filter(tea -> tea.getNumber()==nr).findFirst().get();
+            InhTea teac = dsk.getData().lTea.stream().filter(tea -> tea.getNumber()==nr).findFirst().get();
             jlI = new JLabel(teac.getName());
         }
         

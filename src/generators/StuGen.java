@@ -26,14 +26,14 @@ public class StuGen extends InhStu {
     private void studGenerator(Mainframe dsk, int semester) {
         Random r = new Random();
         NameGenerator ng = new NameGenerator();
-        List<FeatsBackground> lfb = dsk.getRes().lFeatsBackground;
+        List<FeatsBackground> lfb = dsk.getData().lFeatsBackground;
         FeatsBackground fb;
         try{
             fb = lfb.get(r.nextInt(lfb.size()-1));
         } catch (java.lang.IllegalArgumentException e) {
             fb = lfb.get(0);
         }
-        RoomDorm rd = checkDorm(dsk.getRes().lRoomDorm);
+        RoomDorm rd = checkDorm(dsk.getData().lRoomDorm);
         String pname = ng.randomName(false);
         this.setName(pname);
         this.setAttribute(0, 5+r.nextInt(10)+fb.getAttribute(0));
@@ -54,7 +54,7 @@ public class StuGen extends InhStu {
         rd.addStudent(stuNr);
     }
     private boolean checkStuNr(Mainframe dsk, int nr) {
-        return dsk.getRes().lStu.stream().anyMatch(pstu -> pstu.getNumber()==nr);
+        return dsk.getData().lStu.stream().anyMatch(pstu -> pstu.getNumber()==nr);
     }    
     private RoomDorm checkDorm(List<RoomDorm> lrd) {
         return lrd.stream().filter(prd -> prd.getNrInhabitants()<prd.getRoomSize()).findFirst().get();

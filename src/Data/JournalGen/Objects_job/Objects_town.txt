@@ -1,0 +1,25 @@
+_startLow
+beggars
+a thug
+some wrenches
+a party preparing a new adventure
+an artisan
+peasants
+_endLow
+
+_startMedium
+townspeople
+the mob
+a party of adventurers
+_endMedium
+
+_startHigh
+the beggar guild
+the thieves guild
+the warriors guild
+the prostitute guild
+the merchants guild
+the artisans guild
+a rich merchant
+a party that just came back from an adventure
+_endHigh

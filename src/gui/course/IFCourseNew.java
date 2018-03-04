@@ -35,8 +35,8 @@ public class IFCourseNew extends root.IFTemplate {
     }
     
     private void run() {
-        this.tea = dsk.getRes().lTea.get(0);
-        this.rs = dsk.getRes().lRoomStudy.get(0);
+        this.tea = dsk.getData().lTea.get(0);
+        this.rs = dsk.getData().lRoomStudy.get(0);
         this.duration = 2;
         setTable();
         this.setIF(setMain(),setTool());
@@ -173,7 +173,7 @@ public class IFCourseNew extends root.IFTemplate {
     }
     public void fillCB_Tea(int topic) {
         cbTea.removeAllItems();
-        dsk.getRes().lTea.stream().forEach(ptea -> {
+        dsk.getData().lTea.stream().forEach(ptea -> {
                 String teach = ptea.getTeaching()*100+"";
                 String output = ptea.getNumber()+" | "
                         +ptea.getName()+" | "
@@ -192,7 +192,7 @@ public class IFCourseNew extends root.IFTemplate {
     }
     public void fillCB_Room() {
         cbRoom.removeAllItems();
-        dsk.getRes().lRoomStudy.forEach(prs -> {
+        dsk.getData().lRoomStudy.forEach(prs -> {
             String output = prs.getRoomNr()+" | "+prs.getRoomName();
             cbRoom.addItem(output);
         });
@@ -360,7 +360,7 @@ public class IFCourseNew extends root.IFTemplate {
         return ac;
     }
     private void addCourse(ActivityCourse ac) {
-        dsk.getRes().lCourse.add(ac);
+        dsk.getData().lCourse.add(ac);
         if(dsk.getMenuCourse().getCourse()!=null) {
             dsk.getMenuCourse().getCourse().addCourse();
             dsk.getMenuCourse().setCourseNew(null);
@@ -510,12 +510,12 @@ public class IFCourseNew extends root.IFTemplate {
         String selectedItem = (String)cbTea.getSelectedItem();
         String tNr = selectedItem.substring(0, 5);
         System.out.println(tNr);
-        return dsk.getRes().lTea.stream().filter(ptea -> 
+        return dsk.getData().lTea.stream().filter(ptea -> 
                 ptea.getNumber()==Integer.parseInt(tNr)).findAny().get();
     }
     private RoomStudy getRS() {
         String s = (String)cbRoom.getSelectedItem();        
-        return dsk.getRes().lRoomStudy.stream().filter(prs -> 
+        return dsk.getData().lRoomStudy.stream().filter(prs -> 
                 prs.getRoomNr()==Integer.parseInt(s.substring(0,5))).findAny().get();
         
     }

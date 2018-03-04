@@ -213,12 +213,12 @@ public class IFFormer extends root.IFTemplate {
                     String sNr = (String)lInh.getSelectedValue();
                     if(cb.getSelectedIndex()==0) {
                         int teaNr = Integer.parseInt(sNr.substring(0,5));
-                        tea = dsk.getRes().lTea.stream().filter(pTea -> 
+                        tea = dsk.getData().lTea.stream().filter(pTea -> 
                                 pTea.getNumber()==teaNr).findAny().get();
                         setPInh(tea);
                     } else {
                         int stuNr = Integer.parseInt(sNr.substring(0,5));
-                        stu = dsk.getRes().lStu.stream().filter(pStu -> 
+                        stu = dsk.getData().lStu.stream().filter(pStu -> 
                                 pStu.getNumber()==stuNr).findAny().get();
                         setPInh(stu);
                     }
@@ -230,7 +230,7 @@ public class IFFormer extends root.IFTemplate {
     
     private void setLInh_Tea() {
         lmInh.clear();
-        dsk.getRes().lTea.stream().filter(pTea -> 
+        dsk.getData().lTea.stream().filter(pTea -> 
                 pTea.isFormer()).forEach(pTea -> {
                     String output = pTea.getNumber()+" | "
                             +pTea.getName()+" | "
@@ -240,7 +240,7 @@ public class IFFormer extends root.IFTemplate {
     }
     private void setLInh_Stu() {
         lmInh.clear();
-        dsk.getRes().lStu.stream().filter(pStu -> 
+        dsk.getData().lStu.stream().filter(pStu -> 
                 pStu.isFormer()).forEach(pStu -> {
                     String output = pStu.getNumber()+" | "
                             +pStu.getName()+" | "

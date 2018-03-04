@@ -27,7 +27,7 @@ import resources.activity.ActivityCourse;
  */
 public class IFRecap extends root.IFTemplate {
     public IFRecap(Mainframe pdsk) {
-        super("Year " + (pdsk.getRes().year - 1) + " recap",false);
+        super("Year " + (pdsk.getData().year - 1) + " recap",false);
         this.dsk = pdsk;
         run();
     }
@@ -48,7 +48,7 @@ public class IFRecap extends root.IFTemplate {
     }
     private List<ActivityCourse> setlPCour() {
         l_PastCour = new ArrayList();
-        dsk.getRes().lCourse.stream().filter(pAC -> 
+        dsk.getData().lCourse.stream().filter(pAC -> 
                 !pAC.isActive()).forEach((ActivityCourse pAC) -> {
             l_PastCour.add(pAC);
         });
@@ -98,7 +98,7 @@ public class IFRecap extends root.IFTemplate {
     private double getAvgL(ActivityCourse ac) {
         double nr = 0;
         for (int[] stuNr : ac.getStudents()) {
-            resources.Inhabitants.InhStu stu = dsk.getRes().lStu.stream().filter(pstu -> pstu.getNumber()==stuNr[0]).findAny().get();
+            resources.Inhabitants.InhStu stu = dsk.getData().lStu.stream().filter(pstu -> pstu.getNumber()==stuNr[0]).findAny().get();
             nr=nr+stu.getLearn();
         }
         nr = nr/ac.getStudents().size();

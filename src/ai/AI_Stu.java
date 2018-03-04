@@ -29,9 +29,9 @@ public class AI_Stu {
     AI_Stu_choseActivity chose;
     AI_Stu_choseJob createJob;
     
-    List<ActivityCourse> lac;
-    List<ActivityJob> laj;
-    List<ActivityAdventure> laa;
+    List<ActivityCourse> lCourses;
+    List<ActivityJob> lJobs;
+    List<ActivityAdventure> lAdventures;
     
     Random r;
     
@@ -45,7 +45,7 @@ public class AI_Stu {
         System.out.println("Chosing courses for "+pstu.getNumber());
         
         unlucky = 0;
-        jobs=0;
+        jobs = 0;
         
         r = new Random();
         
@@ -53,13 +53,13 @@ public class AI_Stu {
         createJob = new AI_Stu_choseJob();
         
         this.stu = pstu;
-        this.lac = dsk.getRes().lCourse;
-        this.laj = dsk.getRes().lJob;
-        this.laa = dsk.getRes().lAdv;
+        this.lCourses = dsk.getData().lCourse;
+        this.lJobs = dsk.getData().lJob;
+        this.lAdventures = dsk.getData().lAdv;
         
         this.lPref = new ArrayList();
         
-        stu.setJobDesire(dsk.getRes().studyFee);
+        stu.setJobDesire(dsk.getData().studyFee);
         stu.setAdvDesire();
         
         for(int i=0;i<6;i++) {
@@ -68,12 +68,15 @@ public class AI_Stu {
             System.out.println(Arrays.toString(d));
             lPref.add(d);
         }
+        
         while(stu.getWorkTime()<50 && isActivityAvailable() && unlucky<5) {
             topic = chose.choseTopic(lPref,stu,dsk);
             findActivity();
             actualizeLPref(dividePref(topic));
         }
+        
     }
+    
     private void actualizeLPref(double newV) {
         lPref.stream().filter(d -> d[0]==topic).findAny().get()[1]=newV;
         System.out.println("Array pref "+topic);
@@ -97,10 +100,10 @@ public class AI_Stu {
     private void findAdv() {
         System.out.println("Trying to find an adventure for"+stu.getNumber()+"...");
         try {
-            ActivityAdventure aa = laa.stream().filter(pAA -> 
+            ActivityAdventure adventure = lAdventures.stream().filter(pAA -> 
                     compareTT(pAA.getTimeTable()) 
                             && checkActivity_inUse(pAA.getID())).findAny().get();
-            stu.addActivity(aa);
+            stu.addActivity(adventure);
             stu.setHappiness(stu.getHappiness()+15);
         } catch (java.util.NoSuchElementException e) {
             System.out.println("No adventure available");
@@ -115,12 +118,12 @@ public class AI_Stu {
     private void findCourse() {
         System.out.println("Trying to find a course for"+stu.getNumber()+"...");
         try {
-            ActivityCourse ac = lac.stream().filter(pAC -> 
+            ActivityCourse course = lCourses.stream().filter(pAC -> 
                     pAC.getTopic()==(topic) 
                             && compareTT(pAC.getTimeTable()) 
                             && !checkActivity_inUse(pAC.getID())).findAny().get();
-            ac.addStudent(stu.getNumber());
-            stu.addActivity(ac);
+            course.addStudent(stu.getNumber());
+            stu.addActivity(course);
             stu.setHappiness(stu.getHappiness()+15);
         } catch (java.util.NoSuchElementException e) {
             System.out.println("No fitting course available");
@@ -134,8 +137,8 @@ public class AI_Stu {
     }
     private void findJob() {
         System.out.println("Trying to find a job for"+stu.getNumber()+"...");
-        ActivityJob aj = createJob.findJob(stu,dsk);
-        if(aj==null) {
+        ActivityJob job = createJob.findJob(stu,dsk);
+        if(job == null) {
             System.out.println("No Job available");
             unlucky++;
             try {
@@ -144,13 +147,13 @@ public class AI_Stu {
                 stu.setHappiness(0);
             }
         } else {
-            aj.setHost(stu.getNumber());
-            aj.setTimeTable(getDay());
-            aj.setIncome(dsk);
-            stu.addActivity(aj);
+            job.setHost(stu.getNumber());
+            job.setTimeTable(getDay());
+            job.setIncome(dsk);
+            stu.addActivity(job);
             stu.setHappiness(stu.getHappiness()+15);
-            dsk.getRes().lJob.removeIf(pAJ -> pAJ.getID().equals(aj.getID()));
-            dsk.getRes().lJob.add(aj);
+            dsk.getData().lJob.removeIf(pAJ -> pAJ.getID().equals(job.getID()));
+            dsk.getData().lJob.add(job);
         }
     }
     
@@ -159,12 +162,12 @@ public class AI_Stu {
     }
     
     private boolean isAdvAv() {
-        return laa.stream().anyMatch(aa -> 
+        return lAdventures.stream().anyMatch(aa -> 
                 !checkActivity_inUse(aa.getID()) && 
                 compareTT(aa.getTimeTable()));
     }
     private boolean isCourseAv() {
-        return lac.stream().anyMatch(pAC -> 
+        return lCourses.stream().anyMatch(pAC -> 
                 !checkActivity_inUse(pAC.getID()) && 
                 compareTT(pAC.getTimeTable()) && 
                 lPref.get(pAC.getTopic())[1]>0);
@@ -188,7 +191,7 @@ public class AI_Stu {
     }
     
     private boolean checkJobAv() {
-        return dsk.getRes().lJob.stream().anyMatch(pAJ -> pAJ.isActive() && pAJ.getHostNr()==0);
+        return dsk.getData().lJob.stream().anyMatch(pAJ -> pAJ.isActive() && pAJ.getHostNr()==0);
     }
     private boolean dayAv(String[][] cTT) {
         for(int d=0;d<7;d++) {

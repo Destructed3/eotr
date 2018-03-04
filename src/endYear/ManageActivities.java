@@ -20,14 +20,14 @@ public class ManageActivities {
     public ManageActivities(Mainframe pdsk) {
         this.dsk=pdsk;
         this.ai=new ai.AI_Stu(dsk);
-        this.year=dsk.getRes().year;
+        this.year=dsk.getData().year;
         this.jeg = new JournalEntryGenerator();
     }
     
     public void processAct() {
         System.out.println("Do activities");
         System.out.println("Chose Activities");
-        dsk.getRes().lStu.stream().filter(pStu -> !pStu.isFormer()).forEach(pStu -> {
+        dsk.getData().lStu.stream().filter(pStu -> !pStu.isFormer()).forEach(pStu -> {
             pStu.setWorkTime(0);
             ai.choseActivity(pStu);
         });
@@ -38,7 +38,7 @@ public class ManageActivities {
     
     private void doCourses() {
         System.out.println("Do Courses");
-        dsk.getRes().lCourse.stream().filter(pAC -> 
+        dsk.getData().lCourse.stream().filter(pAC -> 
                 pAC.isActive()).forEach(pAC -> {
             processCourse(pAC);
         });
@@ -48,12 +48,12 @@ public class ManageActivities {
         this.ac=pac;
         this.topic = ac.getTopic();
         if(ac.isActive()) {
-            tea = dsk.getRes().lTea.stream().filter(pTea -> 
+            tea = dsk.getData().lTea.stream().filter(pTea -> 
                     pTea.getNumber()==ac.getHostNr()).findFirst().get();
             tea.addEntry(jeg.generateCourseEntry(ac, tea).getText());
             
             ac.getStudents().forEach((int[] pAcc) -> {
-                stu = dsk.getRes().lStu.stream().filter(pStu ->
+                stu = dsk.getData().lStu.stream().filter(pStu ->
                         pStu.getNumber()==pAcc[0]).findFirst().get();
                 
                 pAcc[1] = stu.getAttribute(ac.getTopic());
@@ -82,7 +82,7 @@ public class ManageActivities {
     
     private void doJobs() {
         System.out.println("Do jobs");
-        dsk.getRes().lJob.stream().filter(pAJ -> 
+        dsk.getData().lJob.stream().filter(pAJ -> 
                 pAJ.isActive()
                 && pAJ.getHostNr()!=0).forEach(pAJ -> {
                     System.out.println("Doing Job "+pAJ.getID());
@@ -99,19 +99,19 @@ public class ManageActivities {
     }
     
     private void collectJobIncome_Tea(ActivityJob aj) {
-        dsk.getRes().lAccounting.stream().filter(
+        dsk.getData().lAccounting.stream().filter(
                 pAcc -> pAcc.getYear()==year).findAny().get().addIncomeJob_Tea(aj.getIncome());
-        dsk.getRes().gold += aj.getIncome();
+        dsk.getData().gold += aj.getIncome();
     }
     private void collectJobIncome_Stu(ActivityJob aj) {
-        stu = dsk.getRes().lStu.stream().filter(pStu -> pStu.getNumber()==aj.getHostNr()).findAny().get();
+        stu = dsk.getData().lStu.stream().filter(pStu -> pStu.getNumber()==aj.getHostNr()).findAny().get();
         stu.addGold(aj.getIncome());
     }
     
     private void generateJournalEntry(ActivityJob aj) {
         System.out.println("Generating Journal Entry Job "+aj.getID());
         System.out.println("for "+aj.getHostNr());
-        tea = dsk.getRes().lTea.stream().filter(
+        tea = dsk.getData().lTea.stream().filter(
                 pTea -> pTea.getNumber()==aj.getHostNr()).findFirst().get();
         
         tea.addEntry(jeg.generateJobEntry(tea,aj));
@@ -119,21 +119,21 @@ public class ManageActivities {
     private void generateJournalEntry_stu(ActivityJob aj) {
         System.out.println("Generating Journal Entry Job "+aj.getID());
         System.out.println("for "+aj.getHostNr());
-        stu = dsk.getRes().lStu.stream().filter(
+        stu = dsk.getData().lStu.stream().filter(
                 pStu -> pStu.getNumber()==aj.getHostNr()).findFirst().get();
         stu.addEntry(jeg.generateJobEntry(stu,aj));
     }
     
     private void clearTT() {
-        dsk.getRes().lTea.forEach(pTea -> {
+        dsk.getData().lTea.forEach(pTea -> {
             pTea.resetTimeTable();
             pTea.setWorkTime(0);
         });
-        dsk.getRes().lStu.forEach(pStu -> {
+        dsk.getData().lStu.forEach(pStu -> {
             pStu.resetTimeTable();
             pStu.setWorkTime(0);
         });
-        dsk.getRes().lRoomStudy.forEach(pRS -> {
+        dsk.getData().lRoomStudy.forEach(pRS -> {
             pRS.resetRoomUsage();
         });
     }

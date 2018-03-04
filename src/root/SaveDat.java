@@ -23,7 +23,7 @@ public class SaveDat {
         
     }
     public void saveGame(String datName, gui.Mainframe dsk) {
-        this.saveDat(".\\Saves\\save"+datName+"\\data.sav", dsk.getRes());
+        this.saveDat(".\\Saves\\save"+datName+"\\data.sav", dsk.getData());
     }
     public void saveDat(String datName, Object inputObj) {
         ObjectOutputStream ois = null;

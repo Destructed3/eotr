@@ -55,7 +55,7 @@ public class IFStuMenu extends JInternalFrame {
     private void setMainP() {
         mainP = new JPanel(new java.awt.GridLayout(1,1));
         DefaultListModel lm = new DefaultListModel();
-        dsk.getRes().lStu.stream().filter(stu -> !stu.isFormer()).forEach((stu) -> {
+        dsk.getData().lStu.stream().filter(stu -> !stu.isFormer()).forEach((stu) -> {
             int stuNr = stu.getNumber();
             String sname = stu.getName();
             int sem = stu.getSemester();
@@ -75,7 +75,7 @@ public class IFStuMenu extends JInternalFrame {
         toolP.add(btClose());        
     }
     private void createIF() {
-        dsk.getRes().lStu.stream().filter(stu -> !stu.isFormer()).forEach(stu -> {
+        dsk.getData().lStu.stream().filter(stu -> !stu.isFormer()).forEach(stu -> {
             JInternalFrame jif = new IFStudent(stu,dsk);
             dsk.addJIF(jif);
             ifStu.add(jif);

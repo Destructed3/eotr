@@ -44,7 +44,7 @@ public class IFRoomDormMenu extends JInternalFrame {
     }
     private void createIF() {
         lm = new DefaultListModel();
-        dsk.getRes().lRoomDorm.stream().forEach(rd -> {
+        dsk.getData().lRoomDorm.stream().forEach(rd -> {
             IFRoomDorm jif = new IFRoomDorm(rd,dsk);
             ifD.add(jif);
             dsk.addJIF(jif);
@@ -59,7 +59,7 @@ public class IFRoomDormMenu extends JInternalFrame {
     }
     private void setToolP() {
         toolP = new JPanel(new java.awt.FlowLayout());
-        if(dsk.getRes().lRoomDorm.size()>0) {
+        if(dsk.getData().lRoomDorm.size()>0) {
             toolP.add(getBT_Room());
         }
         toolP.add(btClose());

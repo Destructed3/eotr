@@ -5,14 +5,7 @@
  */
 package gui;
 
-import gui.menuBar.MenuRooms;
-import gui.menuBar.MenuInh;
-import gui.menuBar.MenuAdmin;
-import gui.menuBar.MenuFile;
-import gui.menuBar.MenuCourse;
-import gui.menuBar.MenuRegion;
-import gui.menuBar.EndYear;
-import resources.Inhabitants.InhTea;
+import gui.menuBar.*;
 import gui.admin.IFRecapMssg;
 import resources.*;
 import java.awt.BorderLayout;
@@ -21,7 +14,7 @@ import java.util.Random;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import root.Variables;
+import resources.Inhabitants.InhTea;
 import startGame.StartGame;
 
 /**
@@ -33,7 +26,7 @@ public class Mainframe extends JFrame {
         super("Esperance of the Realm");
         System.out.println("Start game with hero "+character.getNumber());        
         r = new Random();
-        res = new Resources();
+        res = new Data();
         sG = new StartGame(this);
         sG.newGame(character);
         res.lTea.stream().forEach((pTea) -> {
@@ -46,7 +39,7 @@ public class Mainframe extends JFrame {
     public Mainframe(String psave) {
         super("Esperance of the Realm");
         r = new Random();
-        res = new Resources();
+        res = new Data();
         sG = new StartGame(this);
         sG.loadGame(psave);
         run();
@@ -56,7 +49,7 @@ public class Mainframe extends JFrame {
     public Mainframe(String psave, boolean newRound) {
         super("Esperance of the Realm");
         r = new Random();
-        res = new Resources();
+        res = new Data();
         sG = new StartGame(this);
         sG.newRound();
         run();
@@ -65,12 +58,12 @@ public class Mainframe extends JFrame {
         System.out.println("Go!");
     }
     
-    Resources res = null;
+    Data res = null;
     
-    public void setRes(Resources pRes) {
-        this.res=pRes;
+    public void setData(Data pRes) {
+        this.res = pRes;
     }
-    public Resources getRes() {
+    public Data getData() {
         return res;
     }
     
@@ -92,9 +85,6 @@ public class Mainframe extends JFrame {
     EndYear endYear = null;
     
     String save = null;
-    
-    //Stats
-    Variables var = null;
    
     private void run() {
         setDesktop();

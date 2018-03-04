@@ -32,8 +32,8 @@ public class ActivityGenerator {
         for(int venue=0;venue<venues.length;venue++) {
             for(int jobType=0;jobType<4;jobType++) {
                 for(int jobCount=0;jobCount<avJobs[venue][jobType];jobCount++) {
-                    System.out.println("It's year "+dsk.getRes().year);
-                    aj = new ActivityJob(getHeritage_string(venue),jobType,reg,dsk.getRes().year);
+                    System.out.println("It's year "+dsk.getData().year);
+                    aj = new ActivityJob(getHeritage_string(venue),jobType,reg,dsk.getData().year);
                     createID_job();
                     aj.set_AObject();
                     System.out.println("Activity is set for year "+aj.getYear());
@@ -43,7 +43,7 @@ public class ActivityGenerator {
         }
     }
     private void addJob() {
-        dsk.getRes().lJob.add(aj);
+        dsk.getData().lJob.add(aj);
         if(dsk.getMenuCourse()!=null) {
             dsk.getMenuCourse().setCourseNew(null);
         }
@@ -124,11 +124,11 @@ public class ActivityGenerator {
     }
     private boolean checkBeginn(String beg, Mainframe dsk) {
         System.out.println("Compare with");
-        return dsk.getRes().lRegion.stream().anyMatch(
+        return dsk.getData().lRegion.stream().anyMatch(
                 region -> region.getID().substring(0,4).equals(beg));
     }
     private boolean checkNr(int nr, Mainframe dsk) {
-        return dsk.getRes().lRegion.stream().anyMatch(
+        return dsk.getData().lRegion.stream().anyMatch(
                 region -> Integer.parseInt(region.getID().substring(5,9))==nr);
     }
     

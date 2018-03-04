@@ -30,7 +30,7 @@ public class P_Acc extends JPanel {
         super();
         this.acc=pacc;
         this.dsk=pdsk;
-        this.thisYear=pdsk.getRes().year == acc.getYear();
+        this.thisYear=pdsk.getData().year == acc.getYear();
         run();
     }
     
@@ -118,7 +118,7 @@ public class P_Acc extends JPanel {
     
     private int getInc_Jobs() {
         int inc_job = 0;
-        for(ActivityJob aj : dsk.getRes().lJob) {
+        for(ActivityJob aj : dsk.getData().lJob) {
             inc_job=inc_job+aj.getIncome();
         }
         return inc_job;
@@ -209,28 +209,28 @@ public class P_Acc extends JPanel {
     
     private int getTeaWages() {
         int tea_wages=0;
-        for(InhTea tea : dsk.getRes().lTea) {
+        for(InhTea tea : dsk.getData().lTea) {
             tea_wages=tea_wages+tea.getCost();
         }
         return tea_wages;
     }
     private int getMaintRoomsStudy() {
         int maint_rs=0;
-        for(RoomStudy rs : dsk.getRes().lRoomStudy) {
+        for(RoomStudy rs : dsk.getData().lRoomStudy) {
             maint_rs=maint_rs+rs.getMaintenance();
         }
         return maint_rs;
     }
     private int getMaintRoomsQuarter() {
         int maint_rq=0;
-        for(RoomQuarter rq : dsk.getRes().lRoomQuarter) {
+        for(RoomQuarter rq : dsk.getData().lRoomQuarter) {
             maint_rq=maint_rq+rq.getMaintenance();
         }
         return maint_rq;
     }
     private int getMaintRoomsDorm() {
         int maint_rd=0;
-        for(RoomDorm rd : dsk.getRes().lRoomDorm) {
+        for(RoomDorm rd : dsk.getData().lRoomDorm) {
             maint_rd=maint_rd+rd.getMaintenance();
         }
         return maint_rd;

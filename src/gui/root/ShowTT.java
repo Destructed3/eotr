@@ -92,31 +92,31 @@ public class ShowTT extends root.IFTemplate {
         cbChose_Item.setSelectedIndex(0);
     }
     private void setCBChose_Item_Tea() {
-        dsk.getRes().lTea.forEach(pTea -> {
+        dsk.getData().lTea.forEach(pTea -> {
             String output = pTea.getNumber()+" | "+pTea.getName();
             cbChose_Item.addItem(output);
         });
     }
     private void setCBChose_Item_Stu() {
-        dsk.getRes().lStu.forEach(pStu -> {
+        dsk.getData().lStu.forEach(pStu -> {
             String output = pStu.getNumber()+" | "+pStu.getName();
             cbChose_Item.addItem(output);
         });
     }
     private void setCBChose_Item_AA() {
-        dsk.getRes().lAdv.forEach(pAA -> {
+        dsk.getData().lAdv.forEach(pAA -> {
             String output = pAA.getID()+" | "+pAA.getName();
             cbChose_Item.addItem(output);
         });
     }
     private void setCBChose_Item_AC() {
-        dsk.getRes().lCourse.forEach(pAC -> {
+        dsk.getData().lCourse.forEach(pAC -> {
             String output = pAC.getID()+" | "+pAC.getName();
             cbChose_Item.addItem(output);
         });
     }
     private void setCBChose_Item_AJ() {
-        dsk.getRes().lJob.forEach(pAJ -> {
+        dsk.getData().lJob.forEach(pAJ -> {
             String output = pAJ.getID()+" | "+pAJ.getName();
             cbChose_Item.addItem(output);
         });
@@ -165,35 +165,35 @@ public class ShowTT extends root.IFTemplate {
     }
     private void setTable_Tea() {
         String selection = String.valueOf(cbChose_Item.getSelectedItem());
-        InhTea tea = dsk.getRes().lTea.stream().filter(pTea -> 
+        InhTea tea = dsk.getData().lTea.stream().filter(pTea -> 
                 pTea.getNumber()==Integer.parseInt(selection.substring(0,5))
             ).findAny().get();
         drawTable_Inh(tea);
     }
     private void setTable_Stu() {
         String selection = (String)cbChose_Item.getSelectedItem();
-        InhStu stu = dsk.getRes().lStu.stream().filter(pStu -> 
+        InhStu stu = dsk.getData().lStu.stream().filter(pStu -> 
                 pStu.getNumber()==Integer.parseInt(selection.substring(0, 5))
             ).findAny().get();
         drawTable_Inh(stu);
     }
     private void setTable_AA() {
         String selection = (String)cbChose_Item.getSelectedItem();
-        ActivityAdventure aa = dsk.getRes().lAdv.stream().filter(pAA -> 
+        ActivityAdventure aa = dsk.getData().lAdv.stream().filter(pAA -> 
                 pAA.getID().equals(selection.substring(0,7))
             ).findAny().get();
         drawTable_Activity(aa);
     }
     private void setTable_AC() {
         String selection = (String)cbChose_Item.getSelectedItem();
-        ActivityCourse ac = dsk.getRes().lCourse.stream().filter(pAC -> 
+        ActivityCourse ac = dsk.getData().lCourse.stream().filter(pAC -> 
                 pAC.getID().equals(selection.substring(0,7))
             ).findAny().get();
         drawTable_Activity(ac);
     }
     private void setTable_AJ() {
         String selection = (String)cbChose_Item.getSelectedItem();
-        ActivityJob aj = dsk.getRes().lJob.stream().filter(pAJ -> 
+        ActivityJob aj = dsk.getData().lJob.stream().filter(pAJ -> 
                 pAJ.getID().equals(selection.substring(0,7))
             ).findAny().get();
         drawTable_Activity(aj);

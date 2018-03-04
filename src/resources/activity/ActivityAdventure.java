@@ -101,9 +101,9 @@ public class ActivityAdventure extends Activity {
             pNR=String.valueOf(pnr);
         }
         this.id="AA"+pNR;
-        dsk.getRes().lMonster.stream().filter(pMon -> pMon.getID().equals(this.monster)).findAny().get().setCourse(this.id);
+        dsk.getData().lMonster.stream().filter(pMon -> pMon.getID().equals(this.monster)).findAny().get().setCourse(this.id);
     }
     private boolean idUsed(int id, Mainframe dsk){
-        return dsk.getRes().lAdv.stream().anyMatch(pAdv -> Integer.parseInt(pAdv.getID().substring(2,7))==id);
+        return dsk.getData().lAdv.stream().anyMatch(pAdv -> Integer.parseInt(pAdv.getID().substring(2,7))==id);
     }
 }

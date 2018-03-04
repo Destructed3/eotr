@@ -34,9 +34,9 @@ public class IFHire extends root.IFTemplate {
     }
     private JPanel setPMain() {
         main = new JPanel(new java.awt.GridLayout(4,3));
-        for(int i=0;i<dsk.getRes().teacherForHire.length;i++) {
-            if(dsk.getRes().teacherForHire[i]!=null) {
-                ifTfH[i]=new IFTeacher(dsk.getRes().teacherForHire[i],dsk);
+        for(int i=0;i<dsk.getData().teacherForHire.length;i++) {
+            if(dsk.getData().teacherForHire[i]!=null) {
+                ifTfH[i]=new IFTeacher(dsk.getData().teacherForHire[i],dsk);
                 btTfH[i]=btShow(ifTfH[i]);
                 dsk.addJIF(ifTfH[i]);
                 main.add(btTfH[i]);
@@ -69,17 +69,17 @@ public class IFHire extends root.IFTemplate {
         return bt;
     }
     public void fillTfH() {
-        for(int i=0;i<dsk.getRes().teacherForHire.length;i++) {
-            if(dsk.getRes().teacherForHire[i]==null) {
-                dsk.getRes().teacherForHire[i] = new TeaGen(false,true,dsk);
-                dsk.getRes().teacherForHire[i].setTeaFHNr(i);
-                ifTfH[i] = new IFTeacher(dsk.getRes().teacherForHire[i],dsk);
+        for(int i=0;i<dsk.getData().teacherForHire.length;i++) {
+            if(dsk.getData().teacherForHire[i]==null) {
+                dsk.getData().teacherForHire[i] = new TeaGen(false,true,dsk);
+                dsk.getData().teacherForHire[i].setTeaFHNr(i);
+                ifTfH[i] = new IFTeacher(dsk.getData().teacherForHire[i],dsk);
                 main.add(btShow(ifTfH[i]));
             } else {
-                if(dsk.getRes().teacherForHire[i].getAv()>0) {
-                    dsk.getRes().teacherForHire[i].setAv(dsk.getRes().teacherForHire[i].getAv()-1);
+                if(dsk.getData().teacherForHire[i].getAv()>0) {
+                    dsk.getData().teacherForHire[i].setAv(dsk.getData().teacherForHire[i].getAv()-1);
                 } else {
-                    dsk.getRes().teacherForHire[i]=null;
+                    dsk.getData().teacherForHire[i]=null;
                 }
             } 
             

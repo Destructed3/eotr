@@ -1,0 +1,19 @@
+_startLow
+a merchenary
+a poor trader
+a traveler
+a luckless soldier of fortune
+_endLow
+
+_startMedium
+merchenarys
+traders
+traveller
+a lucky soldier of fortune
+_endMedium
+
+_startHigh
+a band of mercenarys
+a mercenary captain
+a rich trader
+_endHigh

@@ -18,7 +18,7 @@ import resources.Inhabitants.InhTea;
 public class ManageUpkeep {
     public ManageUpkeep(Mainframe pdsk) {
         this.dsk=pdsk;
-        this.year=dsk.getRes().year;
+        this.year=dsk.getData().year;
         this.r = new Random();
     }
     
@@ -28,15 +28,15 @@ public class ManageUpkeep {
     }
     
     private void payTeacher() {
-        dsk.getRes().lTea.forEach((InhTea pTea) -> {
+        dsk.getData().lTea.forEach((InhTea pTea) -> {
             try {
-                dsk.getRes().lAccounting.stream().filter(pAcc -> pAcc.getYear()==year).findAny().get();
-                dsk.getRes().gold -= pTea.getCost();
+                dsk.getData().lAccounting.stream().filter(pAcc -> pAcc.getYear()==year).findAny().get();
+                dsk.getData().gold -= pTea.getCost();
                 ManageUpkeep.this.getAccountingYear().addTeaWages(pTea.getCost());
                 pTea.setStayTime(pTea.getStayTime()+1);
             }catch (Exception e) {
-                dsk.getRes().lTea.removeIf(rTea -> rTea.getNumber()==pTea.getNumber());
-                dsk.getRes().reputation -= r.nextInt(5)+5;
+                dsk.getData().lTea.removeIf(rTea -> rTea.getNumber()==pTea.getNumber());
+                dsk.getData().reputation -= r.nextInt(5)+5;
             }
         });
     }
@@ -49,42 +49,42 @@ public class ManageUpkeep {
         this.maintainRoomsDorm();
     }
     private void maintainRoomsStudy() {
-        dsk.getRes().lRoomStudy.stream().filter(pRS -> pRS.isMaintained()).forEach(pRS -> {
-            if(pRS.getMaintenance()<dsk.getRes().gold) {
-                dsk.getRes().gold -= pRS.getMaintenance();
+        dsk.getData().lRoomStudy.stream().filter(pRS -> pRS.isMaintained()).forEach(pRS -> {
+            if(pRS.getMaintenance()<dsk.getData().gold) {
+                dsk.getData().gold -= pRS.getMaintenance();
                 this.getAccountingYear().addMaintRS(pRS.getMaintenance());
             } else {
                 pRS.setMaintained(false);
-                dsk.getRes().reputation -= r.nextInt(3) + 5;
+                dsk.getData().reputation -= r.nextInt(3) + 5;
             }
         });
     }
     private void maintainRoomsQuarter() {
-        dsk.getRes().lRoomQuarter.stream().filter(pRQ -> pRQ.isMaintained()).forEach(pRQ -> {
+        dsk.getData().lRoomQuarter.stream().filter(pRQ -> pRQ.isMaintained()).forEach(pRQ -> {
             try {
-                dsk.getRes().gold -= pRQ.getMaintenance();
+                dsk.getData().gold -= pRQ.getMaintenance();
                 this.getAccountingYear().addMaintRQ(pRQ.getMaintenance());
             } catch(Exception e) {
                 pRQ.setMaintained(false);
-                dsk.getRes().reputation -= r.nextInt(3)+5;
+                dsk.getData().reputation -= r.nextInt(3)+5;
             }
         });
     }
     private void maintainRoomsDorm() {
-        dsk.getRes().lRoomDorm.stream().filter(pRD -> 
+        dsk.getData().lRoomDorm.stream().filter(pRD -> 
                 pRD.isMaintained()).forEach(pRD -> {
-            if(pRD.getMaintenance()<dsk.getRes().gold) {
-                dsk.getRes().gold -= pRD.getMaintenance();
+            if(pRD.getMaintenance()<dsk.getData().gold) {
+                dsk.getData().gold -= pRD.getMaintenance();
                 this.getAccountingYear().addMaintRD(pRD.getMaintenance());
             } else {
                 pRD.setMaintained(false);
-                dsk.getRes().reputation -= r.nextInt(3) + 5;
+                dsk.getData().reputation -= r.nextInt(3) + 5;
             }
         });
     }
     
     private Accounting getAccountingYear() {
-        return dsk.getRes().lAccounting.stream().filter(pAcc -> pAcc.getYear()==year).findAny().get();
+        return dsk.getData().lAccounting.stream().filter(pAcc -> pAcc.getYear()==year).findAny().get();
     } 
     
     Mainframe dsk;

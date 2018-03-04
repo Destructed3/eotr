@@ -1,0 +1,20 @@
+_startLow
+the chef
+some servants
+the guards
+a knight errant
+_endLow
+
+_startMedium
+a courtier
+a knight
+the steward
+_endMedium
+
+_startHigh
+the monarch
+the mage
+the heir to the throne
+the court
+the court mage
+_endHigh

@@ -164,13 +164,13 @@ public class IFGoals extends root.IFTemplate {
     
     private JSlider slPhy() {
         if(slPhy==null) {
-            slPhy=new JSlider(0,200,dsk.getRes().phyVal);
+            slPhy=new JSlider(0,200,dsk.getData().phyVal);
             slPhy.setMajorTickSpacing(50);
             slPhy.setMinorTickSpacing(25);
             slPhy.setPaintTicks(true);
             slPhy.addChangeListener((ChangeEvent e) -> {
                 int newV = slPhy.getValue();
-                dsk.getRes().phyVal = newV;
+                dsk.getData().phyVal = newV;
                 tfPhy.setText(newV+"");
             });
         }
@@ -178,13 +178,13 @@ public class IFGoals extends root.IFTemplate {
     }
     private JSlider slMen() {
         if(slMen==null) {
-            slMen=new JSlider(0,200,dsk.getRes().menVal);
+            slMen=new JSlider(0,200,dsk.getData().menVal);
             slMen.setMajorTickSpacing(100);
             slMen.setMinorTickSpacing(25);
             slMen.setPaintTicks(true);
             slMen.addChangeListener((ChangeEvent e) -> {
                 int newV=slMen.getValue();
-                dsk.getRes().menVal = newV;
+                dsk.getData().menVal = newV;
                 tfMen.setText(newV+"");
             });
         }
@@ -192,13 +192,13 @@ public class IFGoals extends root.IFTemplate {
     }
     private JSlider slSoc() {
         if(slSoc==null) {
-            slSoc=new JSlider(0,200,dsk.getRes().socVal);
+            slSoc=new JSlider(0,200,dsk.getData().socVal);
             slSoc.setMajorTickSpacing(100);
             slSoc.setMinorTickSpacing(25);
             slSoc.setPaintTicks(true);
             slSoc.addChangeListener((ChangeEvent e) -> {
                 int newV=slSoc.getValue();
-                dsk.getRes().socVal = newV;
+                dsk.getData().socVal = newV;
                 tfSoc.setText(newV+"");
             });
         }
@@ -206,13 +206,13 @@ public class IFGoals extends root.IFTemplate {
     }
     private JSlider slMag() {
         if(slMag==null) {
-            slMag=new JSlider(0,200,dsk.getRes().magVal);
+            slMag=new JSlider(0,200,dsk.getData().magVal);
             slMag.setMajorTickSpacing(100);
             slMag.setMinorTickSpacing(25);
             slMag.setPaintTicks(true);
             slMag.addChangeListener((ChangeEvent e) -> {
                 int newV=slMag.getValue();
-                dsk.getRes().magVal = newV;
+                dsk.getData().magVal = newV;
                 tfMag.setText(newV+"");
             });
         }
@@ -220,13 +220,13 @@ public class IFGoals extends root.IFTemplate {
     }
     private JSlider slCombinedAttr() {
         if(slCombinedAttr==null) {
-            slCombinedAttr = new JSlider(0,800,dsk.getRes().total);
+            slCombinedAttr = new JSlider(0,800,dsk.getData().total);
             slCombinedAttr.setMajorTickSpacing(200);
             slCombinedAttr.setMinorTickSpacing(100);
             slCombinedAttr.setPaintTicks(true);
             slCombinedAttr.addChangeListener((ChangeEvent e) -> {
                 int newV = slCombinedAttr.getValue();
-                dsk.getRes().total = newV;
+                dsk.getData().total = newV;
                 tfCombinedAttr.setText(newV+"");
             });
         }
@@ -234,28 +234,28 @@ public class IFGoals extends root.IFTemplate {
     }
     private JSlider slYear() {
         if(slYear==null) {
-            slYear = new JSlider(1,10,dsk.getRes().duration);
+            slYear = new JSlider(1,10,dsk.getData().duration);
             slYear.setMajorTickSpacing(1);
             slYear.setMinorTickSpacing(1);
             slYear.setPaintTicks(true);
             slYear.addChangeListener((ChangeEvent e) -> {
                 int newV = slYear.getValue();
                 tfYear.setText(newV+"");
-                dsk.getRes().duration = newV;
+                dsk.getData().duration = newV;
             });
         }
         return slYear;
     }
     private JSlider slNrGoals() {
         if(slNrGoals==null) {
-            slNrGoals = new JSlider(0,6,dsk.getRes().nrGoals);
+            slNrGoals = new JSlider(0,6,dsk.getData().nrGoals);
             slNrGoals.setMajorTickSpacing(1);
             slNrGoals.setMinorTickSpacing(1);
             slNrGoals.setPaintTicks(true);
             slNrGoals.addChangeListener((ChangeEvent e) -> {
                 int newV = slNrGoals.getValue();
                 tfNrGoals.setText(newV+"");
-                dsk.getRes().nrGoals = newV;
+                dsk.getData().nrGoals = newV;
             });
         }
         return slNrGoals;
@@ -307,49 +307,49 @@ public class IFGoals extends root.IFTemplate {
     
     private JTextField tfPhy() {
         if(tfPhy==null) {
-            tfPhy = new JTextField(String.valueOf(dsk.getRes().phyVal));
+            tfPhy = new JTextField(String.valueOf(dsk.getData().phyVal));
             tfPhy.addKeyListener(kaPhy());
         }
         return tfPhy;
     }
     private JTextField tfMen() {
         if(tfMen==null) {
-            tfMen = new JTextField(String.valueOf(dsk.getRes().menVal));
+            tfMen = new JTextField(String.valueOf(dsk.getData().menVal));
             tfMen.addKeyListener(kaMen());
         }
         return tfMen;
     }
     private JTextField tfSoc() {
         if(tfSoc==null) {
-            tfSoc = new JTextField(String.valueOf(dsk.getRes().socVal));
+            tfSoc = new JTextField(String.valueOf(dsk.getData().socVal));
             tfSoc.addKeyListener(kaSoc());
         }
         return tfSoc;
     }
     private JTextField tfMag() {
         if(tfMag==null) {
-            tfMag = new JTextField(String.valueOf(dsk.getRes().magVal));
+            tfMag = new JTextField(String.valueOf(dsk.getData().magVal));
             tfSoc.addKeyListener(kaMag());
         }
         return tfMag;
     }
     private JTextField tfCombinedAttr() {
         if(tfCombinedAttr==null) {
-            tfCombinedAttr=new JTextField(String.valueOf(dsk.getRes().total));
+            tfCombinedAttr=new JTextField(String.valueOf(dsk.getData().total));
             tfCombinedAttr.addKeyListener(kaCombinedAttr());
         }
         return tfCombinedAttr;
     }
     private JTextField tfYear() {
         if(tfYear==null) {
-            tfYear = new JTextField(String.valueOf(dsk.getRes().duration));
+            tfYear = new JTextField(String.valueOf(dsk.getData().duration));
             tfYear.addKeyListener(kaYear());
         }
         return tfYear;
     }
     private JTextField tfNrGoals() {
         if(tfNrGoals==null) {
-            tfNrGoals = new JTextField(String.valueOf(dsk.getRes().nrGoals));
+            tfNrGoals = new JTextField(String.valueOf(dsk.getData().nrGoals));
             tfNrGoals.setToolTipText("The number of goals that a student has to achieve to finish the studys.");
             tfNrGoals.addKeyListener(kaNrGoals());
         }
@@ -368,7 +368,7 @@ public class IFGoals extends root.IFTemplate {
                         newV = 0;
                     }
                     slPhy.setValue(newV);
-                    dsk.getRes().phyVal = newV;
+                    dsk.getData().phyVal = newV;
                 }
             };
         }
@@ -386,7 +386,7 @@ public class IFGoals extends root.IFTemplate {
                         newV=0;
                     }
                     slMen.setValue(newV);
-                    dsk.getRes().menVal = newV;
+                    dsk.getData().menVal = newV;
                 }
             };
         }
@@ -404,7 +404,7 @@ public class IFGoals extends root.IFTemplate {
                         newV=0;
                     }
                     slSoc.setValue(newV);
-                    dsk.getRes().socVal = newV;
+                    dsk.getData().socVal = newV;
                 }
             };
         }
@@ -422,7 +422,7 @@ public class IFGoals extends root.IFTemplate {
                         newV=0;
                     }
                     slMag.setValue(newV);
-                    dsk.getRes().magVal = newV;
+                    dsk.getData().magVal = newV;
                 }
             };
         }
@@ -440,7 +440,7 @@ public class IFGoals extends root.IFTemplate {
                         newV=0;
                     }
                     slCombinedAttr.setValue(newV);
-                    dsk.getRes().total = newV;
+                    dsk.getData().total = newV;
                 }
             };
         }
@@ -458,7 +458,7 @@ public class IFGoals extends root.IFTemplate {
                         newV=0;
                     }
                     slYear.setValue(newV);
-                    dsk.getRes().duration = newV;
+                    dsk.getData().duration = newV;
                 }
             };
         }
@@ -476,7 +476,7 @@ public class IFGoals extends root.IFTemplate {
                         newV=0;
                     }
                     slNrGoals.setValue(newV);
-                    dsk.getRes().nrGoals = newV;
+                    dsk.getData().nrGoals = newV;
                 }
             };
         }

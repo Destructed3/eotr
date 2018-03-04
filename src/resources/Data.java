@@ -15,15 +15,13 @@ import resources.regions.Region;
 import resources.rooms.RoomDorm;
 import resources.rooms.RoomQuarter;
 import resources.rooms.RoomStudy;
-import root.Goals;
-import root.Variables;
 
 /**
  *
  * @author Die Axt
  */
-public class Resources {
-    public Resources() {        
+public class Data {
+    public Data() {        
     }
     
     // Variables

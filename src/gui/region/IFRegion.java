@@ -318,7 +318,7 @@ public class IFRegion extends IFTemplate {
         if(l_IFJob==null) {
             l_IFJob = new ArrayList();
             getLM_activities().clear();
-            dsk.getRes().lJob.stream().filter(pAJ -> pAJ.getAdvRegion().equals(reg)).forEach(pAJ -> {
+            dsk.getData().lJob.stream().filter(pAJ -> pAJ.getAdvRegion().equals(reg)).forEach(pAJ -> {
                 IF_Job jif = new IF_Job(reg,dsk,pAJ);
                 dsk.addJIF(jif);
                 l_IFJob.add(jif);

@@ -237,10 +237,10 @@ public class Region implements Serializable {
     }
     private boolean checkBeginn(String beg, Mainframe dsk) {
         System.out.println("Compare with");
-        return dsk.getRes().lRegion.stream().anyMatch(reg -> reg.getID().substring(0,4).equals(beg));
+        return dsk.getData().lRegion.stream().anyMatch(reg -> reg.getID().substring(0,4).equals(beg));
     }
     private boolean checkNr(int nr, Mainframe dsk) {
-        return dsk.getRes().lRegion.stream().anyMatch(reg -> Integer.parseInt(reg.getID().substring(5,9))==nr);
+        return dsk.getData().lRegion.stream().anyMatch(reg -> Integer.parseInt(reg.getID().substring(5,9))==nr);
     }
     
     String id;

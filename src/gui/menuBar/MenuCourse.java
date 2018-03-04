@@ -57,7 +57,7 @@ public class MenuCourse extends JMenu {
     private JMenuItem miOpenCourseNew() {
         JMenuItem mi = new JMenuItem("Create Course");
         mi.addActionListener((ActionEvent e) -> {
-            if(dsk.getRes().lRoomStudy.isEmpty()) {
+            if(dsk.getData().lRoomStudy.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Build a Room to do courses first", "No room available...", JOptionPane.OK_OPTION);
             } else {
                 showCourseNew();
@@ -113,7 +113,7 @@ public class MenuCourse extends JMenu {
         return demand;
     }
     public void showDemand() {
-        if(dsk.getRes().lStu.isEmpty()) {
+        if(dsk.getData().lStu.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No students -> no demand!", "No students!", JOptionPane.YES_OPTION);
         } else {
             showIF(getDemand());
@@ -128,7 +128,7 @@ public class MenuCourse extends JMenu {
         }
     }
     public IFCourseNew getCourseNew() {
-        if(dsk.getRes().lRoomStudy.isEmpty()) {
+        if(dsk.getData().lRoomStudy.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Build a Room to do courses first", "No room available...", JOptionPane.OK_OPTION);
                 return null;
             } else {

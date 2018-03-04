@@ -140,6 +140,6 @@ public class IFStudent extends root.IFTemplate {
     }
     
     private resources.rooms.RoomDorm getDorm() {
-        return dsk.getRes().lRoomDorm.stream().filter(pRD -> pRD.getRoomNr()==stu.getDorm()).findAny().get();
+        return dsk.getData().lRoomDorm.stream().filter(pRD -> pRD.getRoomNr()==stu.getDorm()).findAny().get();
     }
 }

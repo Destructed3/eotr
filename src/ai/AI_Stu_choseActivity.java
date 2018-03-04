@@ -105,7 +105,7 @@ public class AI_Stu_choseActivity {
     private long nrCourses(double topic) {
         try {
             return stu.getCourses().stream().filter(cNr -> 
-                dsk.getRes().lCourse.stream().filter(pAC -> 
+                dsk.getData().lCourse.stream().filter(pAC -> 
                         pAC.getID().equals(cNr)).findAny().get().getTopic()==topic).count();
         } catch(NoSuchElementException e) {
             return 0;

@@ -47,9 +47,9 @@ public class AI_Stu_choseJob {
     //Check wether or not a job is available
     private boolean jobAv(int topic) {
         try {
-            return dsk.getRes().lJob.stream().anyMatch(pAJ -> pAJ.getTopic()==topic);
+            return dsk.getData().lJob.stream().anyMatch(pAJ -> pAJ.getTopic()==topic);
         }catch(NullPointerException ex) {
-            System.out.println(dsk.getRes().lJob);
+            System.out.println(dsk.getData().lJob);
             System.out.println("-----");
             return false;
         }
@@ -61,7 +61,7 @@ public class AI_Stu_choseJob {
         while(!lPref.isEmpty()) {
             int attr=sortOutAttribute(l);
             if(isJobAv(attr)) {
-                return dsk.getRes().lJob.stream().filter(pAJ -> pAJ.isActive() && pAJ.getHostNr()==0 && pAJ.getTopic()==attr).findAny().get();
+                return dsk.getData().lJob.stream().filter(pAJ -> pAJ.isActive() && pAJ.getHostNr()==0 && pAJ.getTopic()==attr).findAny().get();
             } else {
                 lPref=eliminateAttribute(attr,lPref);
             }
@@ -69,7 +69,7 @@ public class AI_Stu_choseJob {
         return null;
     }
     private boolean isJobAv(int attr) {
-        return dsk.getRes().lJob.stream().anyMatch(pAJ -> pAJ.isActive() && pAJ.getTopic()==attr);
+        return dsk.getData().lJob.stream().anyMatch(pAJ -> pAJ.isActive() && pAJ.getTopic()==attr);
     }
     
     private int sortOutAttribute(List<int[]> attr) {

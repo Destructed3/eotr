@@ -15,11 +15,10 @@ import java.util.Random;
 import resources.Accounting;
 import resources.FeatsBackground;
 import resources.Inhabitants.InhTea;
-import resources.Resources;
+import resources.Data;
 import resources.regions.Region;
 import resources.rooms.RoomQuarter;
 import root.LoadDat;
-import root.Variables;
 
 /**
  *
@@ -51,7 +50,7 @@ public class StartGame {
     
     public void loadGame(String save) {
         this.ld = new LoadDat();
-        dsk.setRes((Resources) ld.getObject(".\\Saves\\save"+save+"\\data.sav"));
+        dsk.setData((Data) ld.getObject(".\\Saves\\save"+save+"\\data.sav"));
     }
     
     private void setRes() {
@@ -78,25 +77,25 @@ public class StartGame {
         getRes().duration = 6;
     }
     private void setLists() {
-        dsk.getRes().lTea = new ArrayList();
-        dsk.getRes().lStu = new ArrayList();
+        dsk.getData().lTea = new ArrayList();
+        dsk.getData().lStu = new ArrayList();
         
-        dsk.getRes().lRoomStudy = new ArrayList();
-        dsk.getRes().lRoomQuarter = new ArrayList();
-        dsk.getRes().lRoomDorm = new ArrayList();
+        dsk.getData().lRoomStudy = new ArrayList();
+        dsk.getData().lRoomQuarter = new ArrayList();
+        dsk.getData().lRoomDorm = new ArrayList();
         
-        dsk.getRes().lAdv = new ArrayList();
-        dsk.getRes().lCourse = new ArrayList();
-        dsk.getRes().lJob = new ArrayList();
+        dsk.getData().lAdv = new ArrayList();
+        dsk.getData().lCourse = new ArrayList();
+        dsk.getData().lJob = new ArrayList();
         
-        dsk.getRes().lRegion = new ArrayList();
+        dsk.getData().lRegion = new ArrayList();
         
-        dsk.getRes().lMonster = new ArrayList();
-        dsk.getRes().lMssg = new ArrayList();
+        dsk.getData().lMonster = new ArrayList();
+        dsk.getData().lMssg = new ArrayList();
         
-        dsk.getRes().teacherForHire = new InhTea[12];
+        dsk.getData().teacherForHire = new InhTea[12];
         
-        dsk.getRes().lAccounting = new ArrayList();
+        dsk.getData().lAccounting = new ArrayList();
     }
     private void addResources(InhTea character) {
         getRes().lTea.add(character);
@@ -153,8 +152,8 @@ public class StartGame {
         });
     }
     
-    private Resources getRes() {
-        return dsk.getRes();
+    private Data getRes() {
+        return dsk.getData();
     }
     
     Mainframe dsk;

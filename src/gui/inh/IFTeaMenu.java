@@ -38,7 +38,7 @@ public class IFTeaMenu extends IFTemplate {
     }
     private JPanel mainPanel() {
         lm = new DefaultListModel();
-        dsk.getRes().lTea.stream().forEach(tea -> {
+        dsk.getData().lTea.stream().forEach(tea -> {
             String output = tea.getNumber()+" | "+tea.getName()+" | Physical: "+tea.getAttribute(0)+" | Mental: "+tea.getAttribute(1)
                     +" | Social: "+tea.getAttribute(2)+" | Magical: "
                     +tea.getAttribute(3)+" | Teaching: "+tea.getTeaching();
@@ -70,7 +70,7 @@ public class IFTeaMenu extends IFTemplate {
         return bt;
     }
     private void createIF_Tea() {
-        dsk.getRes().lTea.stream().forEach(tea -> {
+        dsk.getData().lTea.stream().forEach(tea -> {
             IFTeacher ift = new IFTeacher(tea, dsk);
             dsk.addJIF(ift);
             ifTea.add(ift);

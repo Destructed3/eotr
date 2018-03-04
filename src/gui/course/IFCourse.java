@@ -50,7 +50,7 @@ public class IFCourse extends IFTemplate {
         setIF(setPTop(),setPMain(),setPTool());
     }
     private JPanel setPTop() {
-        resources.Inhabitants.InhTea tea = dsk.getRes().lTea.stream().filter(ptea -> 
+        resources.Inhabitants.InhTea tea = dsk.getData().lTea.stream().filter(ptea -> 
                 ptea.getNumber()==ac.getHostNr()).findFirst().get();
         int topval;
         switch (ac.getTopicN()) {
@@ -92,7 +92,7 @@ public class IFCourse extends IFTemplate {
     }
     private void setList() {
         lm = new DefaultListModel();
-        List<resources.Inhabitants.InhStu> lstu = dsk.getRes().lStu;
+        List<resources.Inhabitants.InhStu> lstu = dsk.getData().lStu;
         ac.getStudents().stream().forEach(cos -> {
             int sNr = cos[0];
             resources.Inhabitants.InhStu stu = lstu.stream().filter(stud -> stud.getNumber()==sNr).findFirst().get();
@@ -120,7 +120,7 @@ public class IFCourse extends IFTemplate {
         JButton bt = new JButton("Display Participant");
         bt.addActionListener((ActionEvent e) -> {
             int index = list.getSelectedIndex();
-            InhStu stu = dsk.getRes().lStu.get(index);
+            InhStu stu = dsk.getData().lStu.get(index);
             JInternalFrame jif = new IFStudent(stu,dsk);
             dsk.addJIF(jif);
             jif.show();

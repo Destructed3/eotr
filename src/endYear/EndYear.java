@@ -19,7 +19,7 @@ public class EndYear {
         this.pA = new ManageActivities(dsk);
         this.mU = new ManageUpkeep(dsk);
         this.mS = new ManageStudents(dsk);
-        this.year=dsk.getRes().year;
+        this.year=dsk.getData().year;
     }
     
     public void run() {
@@ -33,8 +33,8 @@ public class EndYear {
     }
     
     private void saveNewY() {
-        dsk.getRes().year += year + 1;
-        dsk.getRes().lAccounting.add(acc_new);
+        dsk.getData().year += year + 1;
+        dsk.getData().lAccounting.add(acc_new);
         this.save.saveGame("NewYear", dsk);
     }
     

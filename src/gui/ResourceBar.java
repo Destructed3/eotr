@@ -21,10 +21,10 @@ public class ResourceBar extends JPanel {
     public ResourceBar(Mainframe pdsk) {  
         this.dsk=pdsk;
         resTea = new int[2];
-        resTea[0] = dsk.getRes().year;
+        resTea[0] = dsk.getData().year;
         resTea[1] = avSpaceRQ();
         resStu = new int[2];
-        resStu[0] = (int)dsk.getRes().lStu.stream().filter(pStu -> 
+        resStu[0] = (int)dsk.getData().lStu.stream().filter(pStu -> 
                 !pStu.isFormer()).count();
         resStu[1] = avSpaceRD();
         run();
@@ -45,11 +45,11 @@ public class ResourceBar extends JPanel {
     private void run() {
         this.setLayout(new java.awt.FlowLayout());
         if(year==null) {
-            year = new JLabel("Year: " + dsk.getRes().year + " | ");
+            year = new JLabel("Year: " + dsk.getData().year + " | ");
             this.add(year);
         }
         if(gold==null) {
-            gold = new JLabel("Gold: " + dsk.getRes().gold + " | ");
+            gold = new JLabel("Gold: " + dsk.getData().gold + " | ");
             this.add(gold);
         }
         if(income==null) {
@@ -79,43 +79,43 @@ public class ResourceBar extends JPanel {
     }
     private int avSpaceRD() {
         int space=0;
-        for(resources.rooms.RoomDorm pRD : dsk.getRes().lRoomDorm) {
+        for(resources.rooms.RoomDorm pRD : dsk.getData().lRoomDorm) {
             space=space+pRD.getRoomSize();
         }
         return space;
     }
     private int avSpaceRQ() {
         int space=0;
-        for(resources.rooms.RoomQuarter pRQ : dsk.getRes().lRoomQuarter) {
+        for(resources.rooms.RoomQuarter pRQ : dsk.getData().lRoomQuarter) {
             space=space+pRQ.getRoomSize();
         }
         return space;
     }
     private int getIncome() {
-        return dsk.getRes().gold * (int)dsk.getRes().lStu.stream().filter(pStu -> 
+        return dsk.getData().gold * (int)dsk.getData().lStu.stream().filter(pStu -> 
                 !pStu.isFormer()).count();
     }
     private int getUpkeep() {
         int upk=0;
-        for(InhTea pTea : dsk.getRes().lTea) {
+        for(InhTea pTea : dsk.getData().lTea) {
             upk=upk+pTea.getCost();
         }
-        for(RoomDorm pRD : dsk.getRes().lRoomDorm) {
+        for(RoomDorm pRD : dsk.getData().lRoomDorm) {
             upk=upk+pRD.getMaintenance();
         }
-        for(RoomQuarter pRQ : dsk.getRes().lRoomQuarter) {
+        for(RoomQuarter pRQ : dsk.getData().lRoomQuarter) {
             upk=upk+pRQ.getMaintenance();
         }
-        for(RoomStudy pRS : dsk.getRes().lRoomStudy) {
+        for(RoomStudy pRS : dsk.getData().lRoomStudy) {
             upk=upk+pRS.getMaintenance();
         }
         return upk;
     }
     private int getNrTea() {
-        return dsk.getRes().lTea.size();
+        return dsk.getData().lTea.size();
     }
     private int getNrRQ() {
-        return dsk.getRes().lRoomQuarter.size();
+        return dsk.getData().lRoomQuarter.size();
     }
     
     public void setJLGold(int newG) {
@@ -139,14 +139,14 @@ public class ResourceBar extends JPanel {
         year.setText("Year: "+newY+" | ");
     }
     public void setJLTea_addTea() {        
-        resTea[0]=dsk.getRes().lTea.size();
+        resTea[0]=dsk.getData().lTea.size();
         tea.setText("Teacher: "+resTea[0]+"/"+resTea[1]+" | ");
     }
     public void setJLTea_addSpace() {
         tea.setText("Teacher: "+getNrTea()+"/"+getNrRQ()+" | ");
     }
     public void setJLStu_addStu() {
-        resStu[0]=dsk.getRes().lStu.size();
+        resStu[0]=dsk.getData().lStu.size();
         stu.setText("Students: "+resStu[0]+"/"+resStu[1]+" | ");
     }
     public void setJLStu_addSpace() {
@@ -154,6 +154,6 @@ public class ResourceBar extends JPanel {
         stu.setText("Students: "+resStu[0]+"/"+resStu[1]+" | ");
     }
     public void setJLCour_addCourse() {
-        courses.setText(("Courses: "+dsk.getRes().lCourse.size()));
+        courses.setText(("Courses: "+dsk.getData().lCourse.size()));
     }
 }

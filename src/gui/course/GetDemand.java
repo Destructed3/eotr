@@ -17,7 +17,7 @@ public class GetDemand {
     }
     
     public String getDemand(int attr) {
-        if(dsk.getRes().lStu.isEmpty()) {
+        if(dsk.getData().lStu.isEmpty()) {
             return "No demand yet";
         } else {
             switch(attr) {
@@ -34,7 +34,7 @@ public class GetDemand {
     }
     
     private String getDem(int attrDem) {
-        int divider = dsk.getRes().lStu.size();
+        int divider = dsk.getData().lStu.size();
         double avgDem=attrDem/divider;
         if(30<avgDem) {
             return "Maximal demand";
@@ -55,28 +55,28 @@ public class GetDemand {
     
     private int getDem_Phy() {
         dem_Phy=0;
-        dsk.getRes().lStu.stream().filter(pStu -> !pStu.isFormer()).forEach(pStu -> {
+        dsk.getData().lStu.stream().filter(pStu -> !pStu.isFormer()).forEach(pStu -> {
             dem_Phy=dem_Phy+pStu.getInterest(0);
         });
         return dem_Phy;
     }
     private int getDem_Men() {
         dem_Men=0;
-        dsk.getRes().lStu.stream().filter(pStu -> !pStu.isFormer()).forEach(pStu -> {
+        dsk.getData().lStu.stream().filter(pStu -> !pStu.isFormer()).forEach(pStu -> {
             dem_Men=dem_Men+pStu.getInterest(1);
         });
         return dem_Men;
     }
     private int getDem_Soc() {
         dem_Soc=0;
-        dsk.getRes().lStu.stream().filter(pStu -> !pStu.isFormer()).forEach(pStu -> {
+        dsk.getData().lStu.stream().filter(pStu -> !pStu.isFormer()).forEach(pStu -> {
             dem_Soc=dem_Soc+pStu.getInterest(2);
         });
         return dem_Soc;
     }
     private int getDem_Mag() {
         dem_Mag=0;
-        dsk.getRes().lStu.stream().filter(pStu -> !pStu.isFormer()).forEach(pStu -> {
+        dsk.getData().lStu.stream().filter(pStu -> !pStu.isFormer()).forEach(pStu -> {
             dem_Mag=dem_Mag+pStu.getInterest(3);
         });
         return dem_Mag;

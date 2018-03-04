@@ -54,7 +54,6 @@ public class LoadDat {
                     ois.close();
                 }
             } catch (IOException ex) {
-                ex.printStackTrace();
             }
         }
         return obj;
@@ -69,7 +68,6 @@ public class LoadDat {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
             System.out.println("error "+e.getMessage());
         }
     }

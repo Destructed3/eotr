@@ -51,13 +51,13 @@ public class CharCreation extends JFrame {
         rbClassW.setMnemonic(KeyEvent.VK_W);
         rg.add(rbClassW);
         rbClassT = new JRadioButton("Cunning Thief", false);
-        rbClassT.setMnemonic(com.sun.glass.events.KeyEvent.VK_T);
+        rbClassT.setMnemonic(java.awt.event.KeyEvent.VK_T);
         rg.add(rbClassT);
         rbClassB = new JRadioButton("Folksy Bard", false);
-        rbClassB.setMnemonic(com.sun.glass.events.KeyEvent.VK_B);
+        rbClassB.setMnemonic(java.awt.event.KeyEvent.VK_B);
         rg.add(rbClassB);
         rbClassS = new JRadioButton("Mighty Sorcerer", false);
-        rbClassS.setMnemonic(com.sun.glass.events.KeyEvent.VK_S);
+        rbClassS.setMnemonic(java.awt.event.KeyEvent.VK_S);
         rg.add(rbClassS);
         jp.setLayout(new java.awt.GridLayout(2,2));
         jp.add(rbClassW);
